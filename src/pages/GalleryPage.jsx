@@ -3,19 +3,36 @@ import Lightbox from 'yet-another-react-lightbox';
 import 'yet-another-react-lightbox/styles.css'; // Import styles for the lightbox
 import { FaUserAlt } from 'react-icons/fa'; // Icon for user's name in the overlay
 
+// Importing images
+import image1 from '../assets/1714827910980.jpeg';
+import image2 from '../assets/2.jpg';
+import image3 from '../assets/3.jpg';
+import image4 from '../assets/4.jpg';
+import image5 from '../assets/5.jpg';
+import image6 from '../assets/6.jpg';
+import image7 from '../assets/7.jpg';
+import image8 from '../assets/8.jpg';
+import image9 from '../assets/9.jpg';
+import image10 from '../assets/10.jpg';
+import image11 from '../assets/11.jpg';
+import image12 from '../assets/12.jpg';
+import backgroundImage from '../assets/gallery.jpg';
+
 const GalleryPage = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(null); // To track the clicked image
   const images = [
-    { src: '/images/image1.jpg', userName: 'John Doe', description: 'Delicious food dish 1' },
-    { src: '/images/image2.jpg', userName: 'Jane Smith', description: 'Appetizing dessert 2' },
-    { src: '/images/image3.jpg', userName: 'Alice Cooper', description: 'Refreshing drink 3' },
-    { src: '/images/image4.jpg', userName: 'Bob Marley', description: 'Healthy salad 4' },
-    { src: '/images/image5.jpg', userName: 'Charlie Brown', description: 'Yummy pizza 5' },
-    { src: '/images/image6.jpg', userName: 'David Lee', description: 'Spicy soup 6' },
-    { src: '/images/image7.jpg', userName: 'Eve White', description: 'Fried chicken 7' },
-    { src: '/images/image8.jpg', userName: 'Frank Black', description: 'Pasta 8' },
-    { src: '/images/image9.jpg', userName: 'Grace Green', description: 'Fruit salad 9' },
-    { src: '/images/image10.jpg', userName: 'Henry Adams', description: 'Sushi rolls 10' }
+    { src: image1, userName: 'John Doe', description: 'Delicious food dish 1' },
+    { src: image2, userName: 'Jane Smith', description: 'Appetizing dessert 2' },
+    { src: image3, userName: 'Alice Cooper', description: 'Refreshing drink 3' },
+    { src: image4, userName: 'Bob Marley', description: 'Healthy salad 4' },
+    { src: image5, userName: 'Charlie Brown', description: 'Yummy pizza 5' },
+    { src: image6, userName: 'David Lee', description: 'Spicy Fish Soup' },
+    { src: image7, userName: 'Eve White', description: 'Crispy Fried Chicken' },
+    { src: image8, userName: 'Frank Black', description: 'Red Sauce Pasta' },
+    { src: image9, userName: 'Grace Green', description: 'The Best Fruit Salad' },
+    { src: image10, userName: 'Henry Adams', description: 'Tuna Sushi Rolls' },
+    { src: image11, userName: 'Ivy Brown', description: 'Chocolate Cake' },
+    { src: image12, userName: 'Jack White', description: 'Chocolate And Vanilla Ice Cream' },
   ];
 
   // Handle the opening of the lightbox on image click
@@ -26,9 +43,17 @@ const GalleryPage = () => {
   return (
     <div className="gallery-page">
       {/* Page Title Section */}
-      <div className="page-title text-center py-12 bg-blue-600 text-white">
-        <h1 className="text-4xl font-bold">Gallery</h1>
+      <div
+        className="page-title text-center py-12 bg-cover bg-center text-white"
+        style={{
+          backgroundImage: `url(${backgroundImage})`,
+        }}
+      >
+        <h1 className="text-4xl font-bold bg-black bg-opacity-50 inline-block px-4 py-2 rounded">
+          Gallery
+        </h1>
       </div>
+
 
       {/* Gallery Section */}
       <div className="gallery-section grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-8">
@@ -41,7 +66,7 @@ const GalleryPage = () => {
             <img
               src={image.src}
               alt={`Food Image ${index + 1}`}
-              className="w-full h-full object-cover rounded-lg shadow-lg cursor-pointer"
+              className="w-full h-64 object-cover rounded-lg shadow-lg cursor-pointer"
             />
             <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-50 transition-all rounded-lg"></div>
             <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all text-white text-center">

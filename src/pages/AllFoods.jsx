@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import FoodCard from '../components/FoodCard';
+import backgroundImage from '../assets/bgAll.jpg';
 
 const AllFoods = () => {
   const [foods, setFoods] = useState([]);
@@ -25,9 +26,16 @@ const AllFoods = () => {
   return (
     <div>
       {/* Page Title Section */}
-      <section className="bg-gray-200 text-center py-16">
-        <h1 className="text-4xl font-bold">All Foods</h1>
-      </section>
+      <div
+              className="page-title text-center py-12 bg-cover bg-center text-white"
+              style={{
+                backgroundImage: `url(${backgroundImage})`,
+              }}
+            >
+              <h1 className="text-4xl font-bold bg-black bg-opacity-50 inline-block px-4 py-2 rounded">
+                All Foods
+              </h1>
+            </div>
 
       {/* Search Section */}
       <section className="bg-white py-8 px-4">

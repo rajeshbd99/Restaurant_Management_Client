@@ -1,6 +1,10 @@
 import { NavLink } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import TopFoodCard from '../../components/TopFoodCard';
+import backgroundImage from '../../assets/banner.jpg';
+import specialDish1 from '../../assets/extra1.jpg';
+import specialDish2 from '../../assets/extra2.jpg';
+import specialDish3 from '../../assets/extra3.jpg';
 
 const Home = () => {
   const [topFoods, setTopFoods] = useState([]);
@@ -16,7 +20,9 @@ const Home = () => {
   return (
     <div className="bg-base-100">
       {/* Banner Section */}
-      <section className="hero bg-cover bg-center h-[500px]" style={{ backgroundImage: 'url(/banner.jpg)' }}>
+      <section className="hero bg-cover bg-center h-[500px]" style={{
+                      backgroundImage: `url(${backgroundImage})`,
+                    }}>
         <div className="hero-overlay bg-opacity-50"></div>
         <div className="hero-content text-center text-neutral-content">
           <div className="max-w-md">
@@ -49,29 +55,32 @@ const Home = () => {
       </section>
 
       {/* Extra Section 1: Chef's Specials */}
-      <section className="py-12">
-        <div className="container mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-8">Chef's Specials</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[1, 2, 3].map((_, index) => (
-              <div
-                key={index}
-                className="card shadow-xl bg-white p-4 border rounded-lg hover:shadow-2xl"
-              >
-                <img
-                  src={`/chefs-special-${index + 1}.jpg`}
-                  alt={`Special Dish ${index + 1}`}
-                  className="rounded-lg mb-4"
-                />
-                <h3 className="text-xl font-semibold">Special Dish {index + 1}</h3>
-                <p className="text-sm text-gray-600">
-                  A delightful blend of flavors crafted by our expert chefs.
-                </p>
-              </div>
-            ))}
-          </div>
+      
+
+{/* Extra Section 1: Chef's Specials */}
+<section className="py-12">
+  <div className="container mx-auto">
+    <h2 className="text-3xl font-bold text-center mb-8">Chef's Specials</h2>
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {[specialDish1, specialDish2, specialDish3].map((image, index) => (
+        <div
+          key={index}
+          className="card shadow-xl bg-white p-4 border rounded-lg hover:shadow-2xl"
+        >
+          <img
+            src={image}
+            alt={`Special Dish ${index + 1}`}
+            className="rounded-lg mb-4"
+          />
+          <h3 className="text-xl font-semibold">Special Dish {index + 1}</h3>
+          <p className="text-sm text-gray-600">
+            A delightful blend of flavors crafted by our expert chefs.
+          </p>
         </div>
-      </section>
+      ))}
+    </div>
+  </div>
+</section>
 
       {/* Extra Section 2: Customer Testimonials */}
       <section className="py-12 bg-base-200">
