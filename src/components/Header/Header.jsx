@@ -44,6 +44,14 @@ const Header = () => {
       >
         Gallery
       </NavLink>
+      <NavLink
+        to="/purchase"
+        className={({ isActive }) =>
+          isActive ? 'btn btn-primary' : 'btn btn-ghost'
+        }
+      >
+        Purchase Food
+      </NavLink>
     </>
   );
 

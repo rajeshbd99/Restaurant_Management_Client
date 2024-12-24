@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from '../providers/AuthProvider';
-import { toast } from 'react-toastify';  // Import toastify for notifications
+import { toast } from 'react-toastify'; // Import toastify for notifications
 import 'react-toastify/dist/ReactToastify.css';
 
 const FoodPurchasePage = () => {
@@ -14,43 +14,60 @@ const FoodPurchasePage = () => {
 
   // Fetch food details using food id from API
   useEffect(() => {
-    fetch(`http://localhost:3000/foods/${id}`) // Replace with your actual API endpoint
-      .then((res) => res.json())
+    fetch(`http://localhost:3000/foods/${_id}`) // Replace with your actual API endpoint
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error('Failed to fetch food details');
+        }
+        return res.json();
+      })
       .then((data) => setFood(data))
-      .catch((error) => console.error('Error fetching food details:', error));
+      .catch((error) => {
+        console.error('Error fetching food details:', error);
+        toast.error('Failed to load food details.');
+      });
   }, [id]);
 
   // Handle form submission to process the purchase
   const handlePurchase = () => {
-    if (!food || quantity > food.quantity) {
+    if (!food) {
+      toast.error('Food details not available.');
+      return;
+    }
+    if (quantity > food.quantity) {
       toast.error('Not enough stock available!');
       return;
     }
 
     const orderData = {
+      foodId: food._id,
       foodName: food.name,
       price: food.price,
       quantity: quantity,
       buyerName: user.displayName || user.email,
       buyerEmail: user.email,
-      buyingDate: Date.now(), // Automatically set the current timestamp
     };
 
     // Send the order data to the backend (example: POST request to API)
-    fetch('http://localhost:3000/orders', {  // Replace with your actual order API endpoint
+    fetch('http://localhost:3000/orders', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(orderData),
     })
-      .then((response) => response.json())
-      .then((data) => {
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Failed to place order');
+        }
+        return response.json();
+      })
+      .then(() => {
         // Show success toast and navigate to another page (optional)
         toast.success('Purchase successful! Your order has been placed.');
-        navigate('/orders'); // Redirect to orders page or anywhere you want
+        navigate('/orders'); // Redirect to orders page
       })
       .catch((error) => {
-        toast.error('An error occurred while processing the purchase.');
         console.error('Error making purchase:', error);
+        toast.error('An error occurred while processing the purchase.');
       });
   };
 
@@ -93,7 +110,7 @@ const FoodPurchasePage = () => {
             min="1"
             max={food.quantity}
             value={quantity}
-            onChange={(e) => setQuantity(Math.min(e.target.value, food.quantity))}
+            onChange={(e) => setQuantity(Math.min(Math.max(e.target.value, 1), food.quantity))}
             className="input input-bordered w-full"
           />
           <p className="text-sm text-gray-500">

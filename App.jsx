@@ -4,7 +4,7 @@ import Footer from './components/Footer/Footer';
 import Home from './pages/Home/Home';
 import AllFoods from './pages/AllFoods';
 import SingleFoodPage from './pages/SingleFoodPage';
-import FoodPurchasePage from './pages/FoodPurchasePage';
+import FoodPurchasePage from './src/pages/FoodPurchasePage';
 import GalleryPage from './pages/GalleryPage';
 import Login from './pages/Login/Login';
 import Register from './pages/Register/Register';
