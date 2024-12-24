@@ -12,7 +12,7 @@ const MyOrdersPage = () => {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const response = await axios.get(`/api/orders?email=${user?.email}`);
+        const response = await axios.get(`http://localhost:3000/orders?email=${user?.email}`);
         setOrders(response.data);
       } catch (error) {
         console.error('Error fetching orders:', error);
@@ -26,7 +26,7 @@ const MyOrdersPage = () => {
   // Handle delete order
   const handleDelete = async (orderId) => {
     try {
-      const response = await axios.delete(`/api/orders/${orderId}`);
+      const response = await axios.delete(`http://localhost:3000/orders/${orderId}`);
       if (response.status === 200) {
         setOrders(orders.filter(order => order._id !== orderId)); // Remove deleted order from state
         toast.success('Order deleted successfully!');

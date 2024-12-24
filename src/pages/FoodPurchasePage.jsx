@@ -14,7 +14,7 @@ const FoodPurchasePage = () => {
 
   // Fetch food details using food id from API
   useEffect(() => {
-    fetch(`/api/foods/${id}`) // Replace with your actual API endpoint
+    fetch(`http://localhost:3000/foods/${id}`) // Replace with your actual API endpoint
       .then((res) => res.json())
       .then((data) => setFood(data))
       .catch((error) => console.error('Error fetching food details:', error));
@@ -37,7 +37,7 @@ const FoodPurchasePage = () => {
     };
 
     // Send the order data to the backend (example: POST request to API)
-    fetch('/api/orders', {  // Replace with your actual order API endpoint
+    fetch('http://localhost:3000/orders', {  // Replace with your actual order API endpoint
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(orderData),

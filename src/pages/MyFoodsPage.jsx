@@ -14,7 +14,7 @@ const MyFoodsPage = () => {
   useEffect(() => {
     const fetchMyFoods = async () => {
       try {
-        const response = await axios.get(`/api/foods?email=${user.email}`);
+        const response = await axios.get(`http://localhost:3000/foods?email=${user.email}`);
         setMyFoods(response.data);
       } catch (error) {
         console.error('Error fetching food items:', error);
@@ -33,7 +33,7 @@ const MyFoodsPage = () => {
   const handleUpdateSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`/api/foods/${selectedFood._id}`, selectedFood);
+      await axios.put(`http://localhost:3000/foods/${selectedFood._id}`, selectedFood);
       toast.success('Food item updated successfully!');
       setShowModal(false);
 
