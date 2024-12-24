@@ -7,7 +7,7 @@ const Home = () => {
 
   useEffect(() => {
     // Fetch the top-selling foods based on the number of purchases
-    fetch('/api/top-foods') // Replace with your API endpoint
+    fetch('http://localhost:3000/foods') // Replace with your API endpoint
       .then((res) => res.json())
       .then((data) => setTopFoods(data))
       .catch((error) => console.error('Error fetching top foods:', error));

@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { AuthContext } from '../../providers/AuthProvider';
+import { AuthContext } from '../providers/AuthProvider';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
@@ -30,7 +30,7 @@ const AddFoodPage = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('/api/foods', foodData);
+      const response = await axios.post('http://localhost:3000/foods', foodData);
       if (response.status === 201) {
         toast.success('Food item added successfully!');
         setFoodData({

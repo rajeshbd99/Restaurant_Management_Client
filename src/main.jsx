@@ -1,16 +1,21 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import './index.css';
 
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import Layout from './components/Layout/Layout'
-import Home from './pages/Home/Home'
-import Login from './pages/Login/Login'
-import Register from './pages/Register/Register'
-import AuthProvider from './providers/AuthProvider'
-import PrivateRoute from './routes/PrivateRoute'
-import AllFoods from './pages/AllFoods'
-import GalleryPage from './pages/GalleryPage'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import Layout from './components/Layout/Layout';
+import Home from './pages/Home/Home';
+import Login from './pages/Login/Login';
+import Register from './pages/Register/Register';
+import AuthProvider from './providers/AuthProvider';
+import PrivateRoute from './routes/PrivateRoute';
+import AllFoods from './pages/AllFoods';
+import SingleFoodPage from './components/SingleFoodPage';
+import FoodPurchasePage from './pages/FoodPurchasePage';
+import GalleryPage from './pages/GalleryPage';
+import MyFoodsPage from './pages/MyFoodsPage';
+import AddFoodPage from './pages/AddFoodPage';
+import MyOrders from './pages/MyOrdersPage';
 
 const router = createBrowserRouter([
   {
@@ -20,37 +25,68 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <Home />
+        element: <Home />,
       },
       {
         path: '/login',
-        element: <Login />
+        element: <Login />,
       },
       {
         path: '/register',
-        element: <Register />
+        element: <Register />,
       },
       {
         path: '/foods',
-        element: <AllFoods />
+        element: <AllFoods />,
+      },
+      {
+        path: '/foods/:id', // Dynamic route for single food page
+        element: <SingleFoodPage />,
+      },
+      {
+        path: '/purchase/:id', // Private route for food purchase
+        element: (
+          <PrivateRoute>
+            <FoodPurchasePage />
+          </PrivateRoute>
+        ),
       },
       {
         path: '/gallery',
-        element: <GalleryPage />
+        element: <GalleryPage />,
+      },
+      {
+        path: '/my-foods',
+        element: (
+          <PrivateRoute>
+            <MyFoodsPage />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: '/add-food',
+        element: (
+          <PrivateRoute>
+            <AddFoodPage />
+          </PrivateRoute>
+        ),
       },
       {
         path: '/orders',
-        element: <PrivateRoute>
-        </PrivateRoute>
-      }
-    ]
-  }
-])
+        element: (
+          <PrivateRoute>
+            <MyOrders />
+          </PrivateRoute>
+        ),
+      },
+    ],
+  },
+]);
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <AuthProvider>
       <RouterProvider router={router} />
     </AuthProvider>
-  </StrictMode>,
-)
+  </StrictMode>
+);

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
-import { AuthContext } from '../../providers/AuthProvider';
+import { AuthContext } from '../providers/AuthProvider';
 import { toast } from 'react-toastify';  // Import toastify for notifications
 import 'react-toastify/dist/ReactToastify.css';
 

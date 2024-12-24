@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import { AuthContext } from '../../providers/AuthProvider';
+import { AuthContext } from '../providers/AuthProvider';
 import { FaEdit } from 'react-icons/fa';
 import axios from 'axios';
 import { toast } from 'react-toastify';
