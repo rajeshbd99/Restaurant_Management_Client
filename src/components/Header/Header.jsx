@@ -40,104 +40,85 @@ const Header = () => {
     navigate('/');
   };
 
-  const links = (
-    <>
-      <NavLink
-        to="/"
-        className={({ isActive }) =>
-          isActive
-            ? 'text-white font-semibold text-lg underline'
-            : 'text-gray-300 hover:text-white transition-all duration-300'
-        }
-      >
-        Home
-      </NavLink>
-      <NavLink
-        to="/foods"
-        className={({ isActive }) =>
-          isActive
-            ? 'text-white font-semibold text-lg underline'
-            : 'text-gray-300 hover:text-white transition-all duration-300'
-        }
-      >
-        All Foods
-      </NavLink>
-      <NavLink
-        to="/gallery"
-        className={({ isActive }) =>
-          isActive
-            ? 'text-white font-semibold text-lg underline'
-            : 'text-gray-300 hover:text-white transition-all duration-300'
-        }
-      >
-        Gallery
-      </NavLink>
-      <NavLink
-        to="/purchase"
-        className={({ isActive }) =>
-          isActive
-            ? 'text-white font-semibold text-lg underline'
-            : 'text-gray-300 hover:text-white transition-all duration-300'
-        }
-      >
-        Purchase Food
-      </NavLink>
-    </>
-  );
-
   return (
     <div
-      className={`navbar fixed top-0 left-0 right-0 z-50 ${
+      className={`navbar sticky top-0 left-0 right-0 z-50 px-6 py-4 transition-all duration-300 shadow-md ${
         isDarkMode
-          ? 'bg-black text-white shadow-lg'
-          : 'bg-gradient-to-r from-green-400 via-yellow-500 to-orange-400 text-gray-800'
-      } px-4 py-4 transition-all duration-300`}
+          ? 'bg-gradient-to-r from-blue-700 via-purple-800 to-pink-600 text-white'
+          : 'bg-gradient-to-r from-yellow-300 via-red-400 to-pink-500 text-gray-800'
+      }`}
     >
+      {/* Logo */}
       <div className="navbar-start">
         <button
           onClick={navigateToHome}
-          className="text-2xl font-bold text-white"
+          className="text-3xl font-extrabold hover:text-yellow-500 transition-all duration-300"
         >
           🍴 DineFusion
         </button>
       </div>
 
+      {/* Links */}
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-4 gap-6">{links}</ul>
+        <ul className="menu menu-horizontal px-8 gap-8">
+          <NavLink
+            to="/"
+            className={({ isActive }) =>
+              isActive
+                ? 'text-white font-semibold text-xl underline'
+                : 'text-gray-300 hover:text-white transition-all duration-300 text-xl'
+            }
+          >
+            Home
+          </NavLink>
+          <NavLink
+            to="/foods"
+            className={({ isActive }) =>
+              isActive
+                ? 'text-white font-semibold text-xl underline'
+                : 'text-gray-300 hover:text-white transition-all duration-300 text-xl'
+            }
+          >
+            All Foods
+          </NavLink>
+          <NavLink
+            to="/gallery"
+            className={({ isActive }) =>
+              isActive
+                ? 'text-white font-semibold text-xl underline'
+                : 'text-gray-300 hover:text-white transition-all duration-300 text-xl'
+            }
+          >
+            Gallery
+          </NavLink>
+        </ul>
       </div>
 
+      {/* User Section */}
       <div className="navbar-end flex items-center gap-6">
         <button
           onClick={toggleTheme}
-          className="text-white bg-transparent border-2 border-white rounded-full py-2 px-4 hover:bg-white hover:text-black transition-all duration-300"
+          className="text-white bg-transparent border-2 border-white rounded-full py-2 px-6 hover:bg-white hover:text-black transition-all duration-300"
         >
           {isDarkMode ? 'Light Mode ☀️' : 'Dark Mode 🌙'}
         </button>
 
-        {!user && (
-          <NavLink
-            to="/register"
-            className="px-4 py-2 bg-white text-black rounded-full shadow-md hover:bg-gray-200 transition-all duration-300"
-          >
-            Register
-          </NavLink>
-        )}
-
         {user ? (
           <>
+            {/* Profile Dropdown */}
             <div className="dropdown dropdown-end">
               <div tabIndex={0} className="avatar cursor-pointer">
                 <img
-                  className="w-10 rounded-full border-2 border-white"
-                  src={user.photoURL || 'https://via.placeholder.com/40'}
+                  className="w-12 h-12 rounded-full border-4 border-white"
+                  src={user.photoURL || 'https://via.placeholder.com/60'}
                   alt="Profile"
                 />
               </div>
               <ul
                 tabIndex={0}
-                className={`dropdown-content ${
+                className={`dropdown-content mt-3 w-44 rounded-box p-2 shadow-xl ${
                   isDarkMode ? 'bg-black text-white' : 'bg-white text-gray-800'
-                } mt-3 w-44 rounded-box p-2 shadow-md`}
+                }`}
               >
                 <li>
                   <NavLink
@@ -165,9 +146,11 @@ const Header = () => {
                 </li>
               </ul>
             </div>
+
+            {/* Logout Button */}
             <button
               onClick={handleLogout}
-              className="px-4 py-2 bg-red-500 text-white rounded-full shadow-md hover:bg-red-600 transition-all duration-300"
+              className="px-6 py-3 bg-red-500 text-white rounded-full shadow-md hover:bg-red-600 transition-all duration-300"
             >
               Logout
             </button>
@@ -175,14 +158,14 @@ const Header = () => {
         ) : (
           <NavLink
             to="/login"
-            className="px-4 py-2 bg-red-500 text-white rounded-full shadow-md hover:bg-red-600 transition-all duration-300"
+            className="px-6 py-3 bg-red-500 text-white rounded-full shadow-md hover:bg-red-600 transition-all duration-300"
           >
             Login
           </NavLink>
         )}
       </div>
 
-      {/* Mobile Menu (Hamburger) */}
+      {/* Mobile Menu */}
       <div className="navbar-end lg:hidden">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost">
@@ -203,9 +186,11 @@ const Header = () => {
           </label>
           <ul
             tabIndex={0}
-            className="menu menu-compact dropdown-content mt-3 w-52 bg-black text-white rounded-box p-2 shadow-lg"
+            className="menu menu-compact dropdown-content mt-3 w-52 ${isDarkMode ? 'bg-black text-white' : 'bg-white text-gray-800'} rounded-box p-2 shadow-lg"
           >
-            {links}
+            <NavLink to="/">Home</NavLink>
+            <NavLink to="/foods">All Foods</NavLink>
+            <NavLink to="/gallery">Gallery</NavLink>
           </ul>
         </div>
       </div>
