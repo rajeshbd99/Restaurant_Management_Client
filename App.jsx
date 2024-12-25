@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import Home from './pages/Home/Home';
@@ -12,7 +13,7 @@ import MyFoodsPage from './src/pages/MyFoodsPage';
 import AddFoodPage from './pages/AddFoodPage';
 import MyOrders from './src/pages/MyOrdersPage';
 import PrivateRoute from './routes/PrivateRoute';
-
+import'react-toastify/dist/ReactToastify.css';
 const App = () => {
   return (
     <Router>

@@ -1,175 +1,214 @@
-import { useContext, useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../providers/AuthProvider';
-import axios from 'axios';
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-const AddFoodPage = () => {
-  const { user } = useContext(AuthContext); // Get the logged-in user
-  const [foodData, setFoodData] = useState({
-    name: '',
+const AddFood = () => {
+  const { user } = useContext(AuthContext);
+  const [formData, setFormData] = useState({
     image: '',
+    name: '',
     category: '',
-    quantity: '',
-    price: '',
-    addedBy: {
-      name: user?.displayName || '',
-      email: user?.email || '',
-    },
     origin: '',
     description: '',
+    quantity: '',
+    price: '',
   });
 
-  // Handle input change
+  const navigate = useNavigate();
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFoodData({ ...foodData, [name]: value });
+    setFormData({ ...formData, [name]: value });
   };
 
-  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const data = {
+      ...formData,
+      addedByEmail: user.email,
+      addedByName: user.displayName,
+      purchaseCount: 0,
+      createdAt: new Date().toISOString(),
+    };
 
     try {
-      const response = await axios.post('http://localhost:3000/foods', foodData);
-      if (response.status === 201) {
-        toast.success('Food item added successfully!');
-        setFoodData({
-          name: '',
-          image: '',
-          category: '',
-          quantity: '',
-          price: '',
-          addedBy: {
-            name: user?.displayName || '',
-            email: user?.email || '',
-          },
-          origin: '',
-          description: '',
+      const response = await fetch('http://localhost:3000/foods', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        toast.success('Food item added successfully!', {
+          position: 'top-center',
+          autoClose: 3000, // Show for 3 seconds
+        });
+        setTimeout(() => navigate('/my-foods'), 3000); // Redirect after toast
+      } else {
+        toast.error('Failed to add food item. Please try again.', {
+          position: 'top-center',
+          autoClose: 3000,
         });
       }
     } catch (error) {
       console.error('Error adding food item:', error);
-      toast.error('Failed to add food item.');
+      toast.error('An error occurred. Please try again.', {
+        position: 'top-center',
+        autoClose: 3000,
+      });
     }
   };
 
   return (
-    <div className="add-food-page p-6">
-      <h1 className="text-3xl font-bold mb-6 text-center">Add Food</h1>
-      <form onSubmit={handleSubmit} className="bg-white shadow-lg rounded-lg p-6 space-y-4">
-        {/* Food Name */}
-        <div>
-          <label className="block text-gray-700 font-semibold mb-2">Food Name</label>
-          <input
-            type="text"
-            name="name"
-            value={foodData.name}
-            onChange={handleChange}
-            className="input input-bordered w-full"
-            required
-          />
-        </div>
-
-        {/* Food Image */}
-        <div>
-          <label className="block text-gray-700 font-semibold mb-2">Food Image URL</label>
+    <div className="container mx-auto my-10">
+      <h2 className="text-4xl font-bold text-center mb-8 text-gradient">
+        Add New Food Item
+      </h2>
+      <form
+        onSubmit={handleSubmit}
+        className="max-w-lg mx-auto bg-white shadow-lg rounded-xl p-8 border border-gray-200"
+        style={{ background: 'linear-gradient(135deg, #f5f7fa, #c3cfe2)' }}
+      >
+        {/* Image URL */}
+        <div className="mb-5">
+          <label className="block text-lg font-semibold text-gray-800 mb-2">
+            Image URL
+          </label>
           <input
             type="text"
             name="image"
-            value={foodData.image}
+            value={formData.image}
             onChange={handleChange}
-            className="input input-bordered w-full"
+            className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400 shadow-sm"
             required
           />
         </div>
-
-        {/* Food Category */}
-        <div>
-          <label className="block text-gray-700 font-semibold mb-2">Food Category</label>
+        {/* Food Name */}
+        <div className="mb-5">
+          <label className="block text-lg font-semibold text-gray-800 mb-2">
+            Food Name
+          </label>
+          <input
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400 shadow-sm"
+            required
+          />
+        </div>
+        {/* Category */}
+        <div className="mb-5">
+          <label className="block text-lg font-semibold text-gray-800 mb-2">
+            Category
+          </label>
           <input
             type="text"
             name="category"
-            value={foodData.category}
+            value={formData.category}
             onChange={handleChange}
-            className="input input-bordered w-full"
+            className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400 shadow-sm"
             required
           />
         </div>
-
-        {/* Quantity */}
-        <div>
-          <label className="block text-gray-700 font-semibold mb-2">Quantity</label>
-          <input
-            type="number"
-            name="quantity"
-            value={foodData.quantity}
-            onChange={handleChange}
-            className="input input-bordered w-full"
-            min="0"
-            required
-          />
-        </div>
-
-        {/* Price */}
-        <div>
-          <label className="block text-gray-700 font-semibold mb-2">Price ($)</label>
-          <input
-            type="number"
-            name="price"
-            value={foodData.price}
-            onChange={handleChange}
-            className="input input-bordered w-full"
-            min="0"
-            required
-          />
-        </div>
-
-        {/* Food Origin */}
-        <div>
-          <label className="block text-gray-700 font-semibold mb-2">Food Origin (Country)</label>
+        {/* Origin */}
+        <div className="mb-5">
+          <label className="block text-lg font-semibold text-gray-800 mb-2">
+            Origin
+          </label>
           <input
             type="text"
             name="origin"
-            value={foodData.origin}
+            value={formData.origin}
             onChange={handleChange}
-            className="input input-bordered w-full"
+            className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400 shadow-sm"
             required
           />
         </div>
-
         {/* Description */}
-        <div>
-          <label className="block text-gray-700 font-semibold mb-2">Description</label>
+        <div className="mb-5">
+          <label className="block text-lg font-semibold text-gray-800 mb-2">
+            Description
+          </label>
           <textarea
             name="description"
-            value={foodData.description}
+            value={formData.description}
             onChange={handleChange}
-            className="textarea textarea-bordered w-full"
+            className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400 shadow-sm"
             rows="4"
             required
-          ></textarea>
-        </div>
-
-        {/* Added By (Name & Email) */}
-        <div>
-          <label className="block text-gray-700 font-semibold mb-2">Added By</label>
-          <input
-            type="text"
-            value={`${foodData.addedBy.name} (${foodData.addedBy.email})`}
-            readOnly
-            className="input input-bordered w-full bg-gray-100"
           />
         </div>
-
+        {/* Quantity and Price */}
+        <div className="grid grid-cols-2 gap-4">
+          <div className="mb-5">
+            <label className="block text-lg font-semibold text-gray-800 mb-2">
+              Quantity
+            </label>
+            <input
+              type="number"
+              name="quantity"
+              value={formData.quantity}
+              onChange={handleChange}
+              className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400 shadow-sm"
+              required
+            />
+          </div>
+          <div className="mb-5">
+            <label className="block text-lg font-semibold text-gray-800 mb-2">
+              Price ($)
+            </label>
+            <input
+              type="number"
+              name="price"
+              value={formData.price}
+              onChange={handleChange}
+              className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400 shadow-sm"
+              required
+            />
+          </div>
+        </div>
+        {/* User Information */}
+        <div className="mb-5">
+          <label className="block text-lg font-semibold text-gray-800 mb-2">
+            User Email
+          </label>
+          <input
+            type="email"
+            value={user.email}
+            className="w-full p-3 border rounded-lg text-red-700 bg-gray-200 cursor-not-allowed shadow-sm"
+            readOnly
+          />
+        </div>
+        <div className="mb-5">
+          <label className="block text-lg font-semibold text-gray-800 mb-2">
+            User Name
+          </label>
+          <input
+            type="text"
+            value={user.displayName}
+            className="w-full p-3 border rounded-lg text-red-700 bg-gray-200 cursor-not-allowed shadow-sm"
+            readOnly
+          />
+        </div>
         {/* Submit Button */}
-        <div className="flex justify-center">
-          <button type="submit" className="btn btn-primary">
-            Add Item
+        <div className="text-center">
+          <button
+            type="submit"
+            className="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold py-3 rounded-lg shadow-md hover:shadow-lg hover:from-purple-600 hover:to-pink-600 transition-all"
+          >
+            Add Food
           </button>
         </div>
       </form>
+      {/* Toast Notification Container */}
+      <ToastContainer />
     </div>
   );
 };
 
-export default AddFoodPage;
+export default AddFood;

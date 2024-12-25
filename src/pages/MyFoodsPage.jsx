@@ -1,134 +1,120 @@
-import { useContext, useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useContext } from 'react';
 import { AuthContext } from '../providers/AuthProvider';
-import { FaEdit } from 'react-icons/fa';
-import axios from 'axios';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 const MyFoodsPage = () => {
-  const { user } = useContext(AuthContext); // Get logged-in user
-  const [myFoods, setMyFoods] = useState([]); // State for user's food items
-  const [selectedFood, setSelectedFood] = useState(null); // Food item to be updated
-  const [showModal, setShowModal] = useState(false); // Modal visibility state
+  const { user } = useContext(AuthContext);
+  const [foods, setFoods] = useState([]);
+  const [selectedFood, setSelectedFood] = useState(null);
+  const navigate = useNavigate();
 
-  // Fetch user's food items
+  // Fetch foods added by the logged-in user
   useEffect(() => {
-    const fetchMyFoods = async () => {
-      try {
-        const response = await axios.get(`http://localhost:3000/foods?email=${user.email}`);
-        setMyFoods(response.data);
-      } catch (error) {
-        console.error('Error fetching food items:', error);
-      }
-    };
-    fetchMyFoods();
+    fetch(`http://localhost:3000/myfoods?email=${user.email}`)
+      .then((res) => res.json())
+      .then((data) => setFoods(data))
+      .catch((error) => console.error('Error fetching user foods:', error));
   }, [user.email]);
 
-  // Handle update button click
-  const handleUpdateClick = (food) => {
+  // Handle food update
+  const handleUpdate = (food) => {
     setSelectedFood(food);
-    setShowModal(true);
   };
 
-  // Handle form submission to update food item
-  const handleUpdateSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      await axios.put(`http://localhost:3000/foods/${selectedFood._id}`, selectedFood);
-      toast.success('Food item updated successfully!');
-      setShowModal(false);
-
-      // Refresh the food items list
-      const updatedFoods = myFoods.map((food) =>
-        food._id === selectedFood._id ? selectedFood : food
-      );
-      setMyFoods(updatedFoods);
-    } catch (error) {
-      console.error('Error updating food item:', error);
-      toast.error('Failed to update food item.');
-    }
+  const handleSave = () => {
+    fetch(`http://localhost:3000/foods/${selectedFood._id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(selectedFood),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.message) {
+          toast.success('Food updated successfully!');
+          setSelectedFood(null);
+          // Refresh the food list
+          fetch(`http://localhost:3000/myfoods?email=${user.email}`)
+            .then((res) => res.json())
+            .then((data) => setFoods(data));
+        } else {
+          toast.error('Error updating food.');
+        }
+      })
+      .catch((error) => console.error('Error updating food:', error));
   };
 
   return (
-    <div className="my-foods-page p-6">
-      <h1 className="text-3xl font-bold mb-6 text-center">My Foods</h1>
-
-      {/* Table to display food items */}
-      <table className="table-auto w-full bg-white shadow-lg rounded-lg">
-        <thead>
-          <tr className="bg-gray-200 text-left">
-            <th className="p-4">Image</th>
-            <th className="p-4">Name</th>
-            <th className="p-4">Price</th>
-            <th className="p-4">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {myFoods.map((food) => (
-            <tr key={food._id} className="border-t">
-              <td className="p-4">
-                <img src={food.image} alt={food.name} className="w-16 h-16 rounded-lg" />
-              </td>
-              <td className="p-4">{food.name}</td>
-              <td className="p-4">${food.price}</td>
-              <td className="p-4">
-                <button
-                  className="btn btn-primary btn-sm flex items-center gap-2"
-                  onClick={() => handleUpdateClick(food)}
-                >
-                  <FaEdit /> Update
-                </button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    <div className="container mx-auto py-12">
+      <h1 className="text-4xl font-bold mb-4">My Foods</h1>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {foods.map((food) => (
+          <div key={food._id} className="card">
+            <img src={food.img} alt={food.name} className="w-full h-40 object-cover" />
+            <div className="p-4">
+              <h2 className="text-xl font-semibold">{food.name}</h2>
+              <p>Price: ${food.price}</p>
+              <button
+                className="btn btn-primary mt-4"
+                onClick={() => handleUpdate(food)}
+              >
+                Update
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
 
       {/* Update Modal */}
-      {showModal && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-          <div className="bg-white p-6 rounded-lg shadow-lg w-1/2">
-            <h2 className="text-2xl font-bold mb-4">Update Food Item</h2>
-            <form onSubmit={handleUpdateSubmit}>
-              <div className="mb-4">
-                <label className="block text-gray-700 font-semibold mb-2">Name</label>
+      {selectedFood && (
+        <div className="modal">
+          <div className="modal-box">
+            <h3 className="font-bold text-lg">Update Food</h3>
+            <form>
+              <label className="block">
+                Name:
                 <input
                   type="text"
-                  className="input input-bordered w-full"
                   value={selectedFood.name}
-                  onChange={(e) => setSelectedFood({ ...selectedFood, name: e.target.value })}
-                  required
+                  onChange={(e) =>
+                    setSelectedFood({ ...selectedFood, name: e.target.value })
+                  }
+                  className="input input-bordered w-full"
                 />
-              </div>
-              <div className="mb-4">
-                <label className="block text-gray-700 font-semibold mb-2">Price</label>
+              </label>
+              <label className="block">
+                Price:
                 <input
                   type="number"
-                  className="input input-bordered w-full"
                   value={selectedFood.price}
-                  onChange={(e) => setSelectedFood({ ...selectedFood, price: e.target.value })}
-                  required
+                  onChange={(e) =>
+                    setSelectedFood({ ...selectedFood, price: +e.target.value })
+                  }
+                  className="input input-bordered w-full"
                 />
-              </div>
-              <div className="mb-4">
-                <label className="block text-gray-700 font-semibold mb-2">Image URL</label>
+              </label>
+              <label className="block">
+                Image URL:
                 <input
                   type="text"
+                  value={selectedFood.img}
+                  onChange={(e) =>
+                    setSelectedFood({ ...selectedFood, img: e.target.value })
+                  }
                   className="input input-bordered w-full"
-                  value={selectedFood.image}
-                  onChange={(e) => setSelectedFood({ ...selectedFood, image: e.target.value })}
-                  required
                 />
-              </div>
-              <div className="flex justify-end gap-4">
+              </label>
+              <div className="modal-action">
+                <button type="button" className="btn btn-primary" onClick={handleSave}>
+                  Save
+                </button>
                 <button
                   type="button"
                   className="btn btn-secondary"
-                  onClick={() => setShowModal(false)}
+                  onClick={() => setSelectedFood(null)}
                 >
                   Cancel
-                </button>
-                <button type="submit" className="btn btn-primary">
-                  Update
                 </button>
               </div>
             </form>
