@@ -24,7 +24,7 @@ const FoodCard = ({ food }) => {
   };
 
   return (
-    <div className="max-w-sm mx-auto bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+    <div className="max-w-sm mx-auto bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 mb-10 mt-10">
       {/* Image Section */}
       <div className="relative">
         <img
