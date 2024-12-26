@@ -24,7 +24,7 @@ const Home = () => {
     <div className="bg-base-100">
       {/*Banner Section */}
       <section
-        className="relative h-[600px] bg-cover bg-center flex items-center mt-10 mb-10"
+        className="relative h-[600px] bg-cover bg-center flex items-center mt-10 mb-10 rounded-2xl"
         style={{
           backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.7)), url(${backgroundImage})`,
         }}

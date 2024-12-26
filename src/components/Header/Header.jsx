@@ -5,9 +5,14 @@ import { AuthContext } from '../../providers/AuthProvider';
 const Header = () => {
   const { user, logoutUser } = useContext(AuthContext);
   const navigate = useNavigate();
+
   const [isDarkMode, setIsDarkMode] = useState(() => {
     return localStorage.getItem('theme') === 'dark';
   });
+
+  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+  const [isMainMenuOpen, setIsMainMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
     const rootElement = document.documentElement;
@@ -19,6 +24,17 @@ const Header = () => {
       localStorage.setItem('theme', 'light');
     }
   }, [isDarkMode]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 0);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   const handleLogout = async () => {
     if (user) {
@@ -36,37 +52,41 @@ const Header = () => {
     setIsDarkMode(!isDarkMode);
   };
 
-  const navigateToHome = () => {
-    navigate('/');
+  const toggleUserMenu = () => {
+    setIsUserMenuOpen(!isUserMenuOpen);
+  };
+
+  const toggleMainMenu = () => {
+    setIsMainMenuOpen(!isMainMenuOpen);
+  };
+
+  const closeMenus = () => {
+    setIsUserMenuOpen(false);
+    setIsMainMenuOpen(false);
   };
 
   return (
-    <div
-      className={`navbar sticky top-0 left-0 right-0 z-50 px-6 py-4 transition-all duration-300 shadow-md ${
+    <header
+      className={`sticky top-0 z-50 w-full px-4 py-3 transition-all duration-300 ${
         isDarkMode
-          ? 'bg-gradient-to-r from-blue-700 via-purple-800 to-pink-600 text-white'
-          : 'bg-gradient-to-r from-yellow-300 via-red-400 to-pink-500 text-gray-800'
-      }`}
+          ? 'bg-gradient-to-r from-blue-800 via-purple-900 to-black text-white'
+          : 'bg-white shadow-md text-gray-800'
+      } ${isScrolled ? 'backdrop-blur-lg bg-opacity-70' : ''}`}
     >
-      {/* Logo */}
-      <div className="navbar-start">
-        <button
-          onClick={navigateToHome}
-          className="text-3xl font-extrabold hover:text-yellow-500 transition-all duration-300"
-        >
+      <div className="container mx-auto flex items-center justify-between">
+        {/* Logo */}
+        <div className="text-2xl font-bold cursor-pointer hover:text-red-600" onClick={() => navigate('/')}>
           🍴 DineFusion
-        </button>
-      </div>
+        </div>
 
-      {/* Links */}
-      <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-8 gap-8">
+        {/* Desktop Navigation */}
+        <nav className="hidden md:flex items-center space-x-8">
           <NavLink
             to="/"
             className={({ isActive }) =>
               isActive
-                ? 'text-white font-semibold text-xl underline'
-                : 'text-gray-300 hover:text-white transition-all duration-300 text-xl'
+                ? 'text-lg font-semibold underline'
+                : 'text-lg text-gray-500 hover:text-black dark:hover:text-red-500 transition'
             }
           >
             Home
@@ -75,8 +95,8 @@ const Header = () => {
             to="/foods"
             className={({ isActive }) =>
               isActive
-                ? 'text-white font-semibold text-xl underline'
-                : 'text-gray-300 hover:text-white transition-all duration-300 text-xl'
+                ? 'text-lg font-semibold underline'
+                : 'text-lg text-gray-500 hover:text-black dark:hover:text-red-500 transition'
             }
           >
             All Foods
@@ -85,93 +105,83 @@ const Header = () => {
             to="/gallery"
             className={({ isActive }) =>
               isActive
-                ? 'text-white font-semibold text-xl underline'
-                : 'text-gray-300 hover:text-white transition-all duration-300 text-xl'
+                ? 'text-lg font-semibold underline'
+                : 'text-lg text-gray-500 hover:text-black dark:hover:text-red-500 transition'
             }
           >
             Gallery
           </NavLink>
-        </ul>
-      </div>
+        </nav>
 
-      {/* User Section */}
-      <div className="navbar-end flex items-center gap-6">
-        <button
-          onClick={toggleTheme}
-          className="text-white bg-transparent border-2 border-white rounded-full py-2 px-6 hover:bg-white hover:text-black transition-all duration-300"
-        >
-          {isDarkMode ? 'Light Mode ☀️' : 'Dark Mode 🌙'}
-        </button>
-
-        {user ? (
-          <>
-            {/* Profile Dropdown */}
-            <div className="dropdown dropdown-end">
-              <div tabIndex={0} className="avatar cursor-pointer">
-                <img
-                  className="w-12 h-12 rounded-full border-4 border-white"
-                  src={user.photoURL || 'https://via.placeholder.com/60'}
-                  alt="Profile"
-                />
-              </div>
-              <ul
-                tabIndex={0}
-                className={`dropdown-content mt-3 w-44 rounded-box p-2 shadow-xl ${
-                  isDarkMode ? 'bg-black text-white' : 'bg-white text-gray-800'
-                }`}
-              >
-                <li>
-                  <NavLink
-                    to="/my-foods"
-                    className="block px-4 py-2 hover:bg-gray-200"
-                  >
-                    My Foods
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    to="/add-food"
-                    className="block px-4 py-2 hover:bg-gray-200"
-                  >
-                    Add Food
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    to="/my-orders"
-                    className="block px-4 py-2 hover:bg-gray-200"
-                  >
-                    My Orders
-                  </NavLink>
-                </li>
-              </ul>
-            </div>
-
-            {/* Logout Button */}
-            <button
-              onClick={handleLogout}
-              className="px-6 py-3 bg-red-500 text-white rounded-full shadow-md hover:bg-red-600 transition-all duration-300"
-            >
-              Logout
-            </button>
-          </>
-        ) : (
-          <NavLink
-            to="/login"
-            className="px-6 py-3 bg-red-500 text-white rounded-full shadow-md hover:bg-red-600 transition-all duration-300"
+        {/* Theme Toggle & User Section */}
+        <div className="flex items-center space-x-4">
+          <button
+            onClick={toggleTheme}
+            className="hidden md:block text-sm px-4 py-2 rounded-md border-2 border-transparent hover:border-gray-300 dark:hover:border-gray-700"
           >
-            Login
-          </NavLink>
-        )}
-      </div>
+            {isDarkMode ? 'Light Mode ☀️' : 'Dark Mode 🌙'}
+          </button>
 
-      {/* Mobile Menu */}
-      <div className="navbar-end lg:hidden">
-        <div className="dropdown">
-          <label tabIndex={0} className="btn btn-ghost">
+          {user ? (
+            <>
+              {/* User Avatar */}
+              <div className="relative">
+                <div
+                  tabIndex={0}
+                  className="cursor-pointer text-3xl"
+                  onClick={toggleUserMenu}
+                >
+                  <img
+                    className="w-10 h-10 rounded-full"
+                    src={user.photoURL || 'https://via.placeholder.com/60'}
+                    alt="Profile"
+                  />
+                </div>
+
+                {/* User Dropdown Menu */}
+                <ul
+                  className={`absolute right-0 mt-2 w-40 rounded-md shadow-lg ${
+                    isDarkMode ? 'bg-black text-white' : 'bg-white text-gray-800'
+                  } ${isUserMenuOpen ? 'block' : 'hidden'}`}
+                  onMouseLeave={() => setIsUserMenuOpen(false)}
+                >
+                  <li className="hover:bg-gray-200 px-4 py-2">
+                    <NavLink to="/my-foods">My Foods</NavLink>
+                  </li>
+                  <li className="hover:bg-gray-200 px-4 py-2">
+                    <NavLink to="/add-food">Add Food</NavLink>
+                  </li>
+                  <li className="hover:bg-gray-200 px-4 py-2">
+                    <NavLink to="/my-orders">My Orders</NavLink>
+                  </li>
+                </ul>
+              </div>
+
+              {/* Logout Button */}
+              <button
+                onClick={handleLogout}
+                className="hidden md:block px-4 py-2 rounded-md bg-red-500 text-white hover:bg-red-600 transition"
+              >
+                Logout
+              </button>
+            </>
+          ) : (
+            <NavLink
+              to="/login"
+              className="hidden md:block px-4 py-2 rounded-md bg-red-500 text-white hover:bg-red-600 transition"
+            >
+              Login
+            </NavLink>
+          )}
+
+          {/* Mobile Menu Toggle */}
+          <button
+            onClick={toggleMainMenu}
+            className="md:hidden text-gray-800 dark:text-red-500"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6 text-white"
+              className="h-6 w-6"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -179,22 +189,39 @@ const Header = () => {
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h8m-8 6h16"
+                strokeWidth={2}
+                d="M4 6h16M4 12h16m-8 6h8"
               />
             </svg>
-          </label>
-          <ul
-            tabIndex={0}
-            className="menu menu-compact dropdown-content mt-3 w-52 ${isDarkMode ? 'bg-black text-white' : 'bg-white text-gray-800'} rounded-box p-2 shadow-lg"
-          >
-            <NavLink to="/">Home</NavLink>
-            <NavLink to="/foods">All Foods</NavLink>
-            <NavLink to="/gallery">Gallery</NavLink>
-          </ul>
+          </button>
         </div>
       </div>
-    </div>
+
+      {/* Mobile Navigation */}
+      {isMainMenuOpen && (
+        <nav
+          className={`absolute top-full left-0 w-full bg-white dark:bg-black text-gray-800 dark:text-white shadow-md md:hidden`}
+        >
+          <ul className="flex flex-col space-y-4 py-4 px-6">
+            <li className="hover:bg-gray-200 px-4 py-2">
+              <NavLink to="/" onClick={closeMenus}>
+                Home
+              </NavLink>
+            </li>
+            <li className="hover:bg-gray-200 px-4 py-2">
+              <NavLink to="/foods" onClick={closeMenus}>
+                All Foods
+              </NavLink>
+            </li>
+            <li className="hover:bg-gray-200 px-4 py-2">
+              <NavLink to="/gallery" onClick={closeMenus}>
+                Gallery
+              </NavLink>
+            </li>
+          </ul>
+        </nav>
+      )}
+    </header>
   );
 };
 
