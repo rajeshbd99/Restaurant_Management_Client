@@ -1,9 +1,28 @@
-# React + Vite
+# DineFusion
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the frontend of the DineFusion, a web-based platform for adding, viewing, and managing food items. Built with React.js, it provides a user-friendly interface for seamless interaction with the application.
 
-Currently, two official plugins are available:
+## Purpose
+The frontend of this project is designed to enable users to:
+- View a list of available food items.
+- Add new food items to the database.
+- Manage food items added by the user.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-# b10a11-client-side-rajeshbd99
+## Live URL
+You can access the live application at: [Live Application URL](https://restaurant-management-66f13.web.app/)
+
+## Key Features
+- **Responsive Design:** Ensures usability across devices of all sizes.
+- **Authentication:** Secure login and registration functionality.
+- **CRUD Operations:** Add, view, edit, and delete food items.
+- **Toast Notifications:** Real-time feedback for user actions.
+- **User Context:** Manage user information across the application.
+
+## NPM Packages Used
+The following npm packages were used in this project:
+- **react-router-dom**: For routing and navigation.
+- **react-toastify**: For toast notifications.
+- **axios**: For API communication.
+- **tailwindcss**: For responsive and modern styling.
+- **@heroicons/react**: For icons used throughout the app.
+- **dotenv**: For environment variables.
