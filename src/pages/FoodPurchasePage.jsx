@@ -71,6 +71,11 @@ const FoodPurchasePage = () => {
       });
   };
 
+  // Function to format price safely
+  const formatPrice = (price) => {
+    return typeof price === 'number' && !isNaN(price) ? price.toFixed(2) : 'N/A';
+  };
+
   if (!food) return <div>Loading...</div>;
 
   return (
@@ -95,7 +100,7 @@ const FoodPurchasePage = () => {
           <input
             type="text"
             id="price"
-            value={`$${food.price.toFixed(2)}`}
+            value={`$${formatPrice(food.price)}`}
             readOnly
             className="input input-bordered w-full"
           />

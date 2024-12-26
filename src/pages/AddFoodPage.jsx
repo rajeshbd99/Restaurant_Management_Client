@@ -13,7 +13,7 @@ const AddFoodPage = () => {
     origin: '',
     description: '',
     quantity: '',
-    price: '',
+    price: '', // Initially as an empty string
   });
 
   const navigate = useNavigate();
@@ -25,8 +25,17 @@ const AddFoodPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Ensure price is a number, or show an error if it's invalid
+    const price = parseFloat(formData.price);
+    if (isNaN(price) || price <= 0) {
+      toast.error('Please enter a valid price.');
+      return;
+    }
+
     const data = {
       ...formData,
+      price, // Ensure price is a valid number
       addedByEmail: user.email,
       addedByName: user.displayName,
       purchaseCount: 0,

@@ -24,16 +24,33 @@ const FoodCard = ({ food }) => {
   };
 
   return (
-    <div className="card shadow-lg bg-white border p-4 rounded-lg">
-      <figure>
-        <img src={image} alt={name} className="rounded-t-lg" />
-      </figure>
-      <div className="card-body">
-        <h2 className="card-title">{name}</h2>
-        <p>Price: ${typeof price === 'number' ? price.toFixed(2) : 'N/A'}</p>
-        <p>Available: {quantity}</p>
+    <div className="max-w-sm mx-auto bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+      {/* Image Section */}
+      <div className="relative">
+        <img
+          src={image}
+          alt={name}
+          className="w-full h-48 object-cover"
+        />
+        {isOutOfStock && (
+          <div className="absolute top-0 left-0 bg-gray-800 bg-opacity-75 text-white text-sm px-3 py-1 rounded-br-lg">
+            Out of Stock
+          </div>
+        )}
+      </div>
 
-        <div className="flex items-center gap-4">
+      {/* Content Section */}
+      <div className="p-5">
+        <h2 className="text-lg font-bold text-gray-800 truncate">{name}</h2>
+        <p className="text-gray-600 mt-2">
+          Price: <span className="font-semibold">${typeof price === 'number' ? price.toFixed(2) : 'N/A'}</span>
+        </p>
+        <p className="text-gray-600">
+          Available: <span className="font-semibold">{quantity}</span>
+        </p>
+
+        {/* Purchase Controls */}
+        <div className="mt-4 flex items-center space-x-3">
           <input
             type="number"
             min="1"
@@ -41,20 +58,28 @@ const FoodCard = ({ food }) => {
             value={purchaseQuantity}
             onChange={handleQuantityChange}
             disabled={isOutOfStock || isOwnFood}
-            className="input input-bordered w-1/3"
+            className="w-16 border border-gray-300 rounded-lg px-2 py-1 focus:ring-2 focus:ring-indigo-500 focus:outline-none disabled:opacity-50"
           />
           <button
             onClick={handlePurchase}
             disabled={isOutOfStock || isOwnFood || purchaseQuantity > quantity}
-            className="btn btn-primary"
+            className={`px-4 py-2 text-sm font-semibold rounded-md transition-colors ${
+              isOutOfStock || isOwnFood || purchaseQuantity > quantity
+                ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                : 'bg-indigo-600 text-white hover:bg-indigo-700'
+            }`}
           >
             {isOutOfStock ? 'Out of Stock' : isOwnFood ? 'Cannot Buy' : 'Purchase'}
           </button>
         </div>
 
-        <div className="card-actions justify-end mt-4">
-          <NavLink to={`/foods/${_id}`} className="btn btn-sm btn-primary">
-            Details
+        {/* Actions Section */}
+        <div className="mt-4 text-right">
+          <NavLink
+            to={`/foods/${_id}`}
+            className="text-indigo-600 font-medium hover:underline"
+          >
+            View Details
           </NavLink>
         </div>
       </div>

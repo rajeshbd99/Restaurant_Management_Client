@@ -32,6 +32,11 @@ const SingleFoodPage = () => {
     navigate(`/purchase/${id}`); // Redirect to purchase page
   };
 
+  // Function to format price if it's a valid number
+  const formatPrice = (price) => {
+    return typeof price === 'number' && !isNaN(price) ? price.toFixed(2) : 'N/A';
+  };
+
   if (loading) return <div className="text-center text-xl font-semibold">Loading...</div>;
   if (error) return <div className="text-center text-xl font-semibold text-red-500">Error: {error}</div>;
   if (!food) return <div className="text-center text-xl font-semibold">Food not found</div>;
@@ -52,7 +57,7 @@ const SingleFoodPage = () => {
         <div className="w-full md:w-1/2 space-y-6">
           <h1 className="text-3xl font-semibold text-gray-800">{food.name}</h1>
           <p className="text-lg text-gray-600">{food.description}</p>
-          <p className="text-xl font-bold text-green-600">Price: ${food.price?.toFixed(2)}</p>
+          <p className="text-xl font-bold text-green-600">Price: ${formatPrice(food.price)}</p>
           <p className="text-lg text-gray-600">Available Quantity: {food.quantity}</p>
           <p className="text-lg text-gray-600">Purchase Count: {food.purchaseCount || 0}</p>
 
