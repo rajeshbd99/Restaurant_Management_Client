@@ -1,34 +1,86 @@
+import React from 'react';
+import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin, FaYoutube } from 'react-icons/fa';
+
 const Footer = () => {
-    return (
-      <footer className="footer p-10 bg-base-200 text-base-content">
+  return (
+    <footer className="p-10 bg-gradient-to-r from-gray-800 via-gray-700 to-gray-900 text-white">
+      <div className="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
+        {/* About Section */}
         <div>
-          <h2 className="text-xl font-bold">DineFusion</h2>
-          <p>123 Fusion Street<br />Foodie City, Flavorland</p>
-          <p>Email: contact@dinefusion.com<br />Phone: (123) 456-7890</p>
+          <h2 className="text-2xl font-bold mb-4">DineFusion</h2>
+          <p className="text-sm">
+            Your go-to destination for delightful culinary experiences. 
+            Savor the fusion of flavors and ambiance since <strong>2024</strong>.
+          </p>
+          <p className="mt-4 text-sm">
+            © 2024 DineFusion. All rights reserved.
+          </p>
         </div>
+
+        {/* Quick Links */}
         <div>
-          <span className="footer-title">Social Media</span>
-          <div className="grid grid-flow-col gap-4">
-            <a href="#" aria-label="Facebook">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" className="w-6 h-6">
-                <path d="M22 12C22 6.48 17.52 2 12 2S2 6.48 2 12c0 4.84 3.87 8.84 8.72 9.74V14.89H8.77v-2.89h2.95V9.8c0-2.92 1.72-4.51 4.37-4.51 1.27 0 2.6.23 2.6.23v2.85H16.6c-1.43 0-1.87.89-1.87 1.8v2.03h3.16l-.5 2.89h-2.65v6.85C18.13 20.89 22 16.89 22 12z" />
-              </svg>
+          <h3 className="text-xl font-semibold mb-4">Quick Links</h3>
+          <ul className="space-y-2">
+            <li>
+              <a href="#about" className="hover:underline">About Us</a>
+            </li>
+            <li>
+              <a href="#menu" className="hover:underline">Our Menu</a>
+            </li>
+            <li>
+              <a href="#reservations" className="hover:underline">Reservations</a>
+            </li>
+            <li>
+              <a href="#contact" className="hover:underline">Contact</a>
+            </li>
+          </ul>
+        </div>
+
+        {/* Contact Us */}
+        <div>
+          <h3 className="text-xl font-semibold mb-4">Contact Us</h3>
+          <p className="text-sm">
+            <strong>Email:</strong> support@dinefusion.com
+          </p>
+          <p className="text-sm">
+            <strong>Phone:</strong> +1 987 654 3210
+          </p>
+          <p className="text-sm">
+            <strong>Address:</strong> 456 Culinary Avenue
+          </p>
+        </div>
+
+        {/* Follow Us */}
+        <div>
+          <h3 className="text-xl font-semibold mb-4">Follow Us</h3>
+          <div className="flex space-x-4 text-lg">
+            <a href="#!" aria-label="Facebook" className="hover:text-blue-500">
+              <FaFacebook />
             </a>
-            <a href="#" aria-label="Twitter">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" className="w-6 h-6">
-                <path d="M19.94 4.76c-.63.28-1.31.47-2.02.56.73-.44 1.29-1.13 1.55-1.95-.68.4-1.43.7-2.23.86A3.918 3.918 0 0013.4 3c-2.18 0-3.95 1.78-3.95 3.97 0 .31.04.61.1.9-3.28-.16-6.18-1.73-8.13-4.1-.34.58-.53 1.27-.53 2 0 1.38.7 2.59 1.76 3.3-.65-.02-1.25-.2-1.78-.49v.05c0 1.93 1.37 3.54 3.18 3.91-.33.09-.68.14-1.03.14-.25 0-.5-.02-.74-.07.5 1.57 1.96 2.72 3.69 2.75A7.87 7.87 0 012 19.59a11.073 11.073 0 006.01 1.76c7.21 0 11.15-5.98 11.15-11.16 0-.17 0-.35-.01-.52a7.93 7.93 0 002-2.02z" />
-              </svg>
+            <a href="#!" aria-label="Twitter" className="hover:text-blue-400">
+              <FaTwitter />
             </a>
-            <a href="#" aria-label="Instagram">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" className="w-6 h-6">
-                <path d="M12 2.16c3.29 0 3.68.01 4.97.07 1.28.06 2.15.28 2.64.47a5.13 5.13 0 011.89 1.2c.52.5.9 1.1 1.2 1.88.19.49.4 1.36.47 2.64.06 1.29.07 1.68.07 4.97s-.01 3.68-.07 4.97c-.06 1.28-.28 2.15-.47 2.64a5.13 5.13 0 01-1.2 1.89c-.5.52-1.1.9-1.88 1.2-.49.19-1.36.4-2.64.47-1.29.06-1.68.07-4.97.07s-3.68-.01-4.97-.07c-1.28-.06-2.15-.28-2.64-.47a5.13 5.13 0 01-1.89-1.2c-.52-.5-.9-1.1-1.2-1.88-.19-.49-.4-1.36-.47-2.64C2.16 15.68 2.15 15.29 2.15 12s.01-3.68.07-4.97c.06-1.28.28-2.15.47-2.64a5.13 5.13 0 011.2-1.89c.5-.52 1.1-.9 1.88-1.2.49-.19 1.36-.4 2.64-.47C8.32 2.17 8.71 2.16 12 2.16m0-2C8.65.16 8.21.16 7.02.22c-1.29.06-2.42.29-3.35.6a7.34 7.34 0 00-2.8 1.64c-.9.89-1.51 1.9-1.89 2.98-.3.93-.53 2.06-.6 3.35-.06 1.19-.06 1.63-.06 5.98s0 4.79.06 5.98c.06 1.29.29 2.42.6 3.35.38 1.08.99 2.09 1.89 2.98.89.9 1.9 1.51 2.98 1.89.93.3 2.06.53 3.35.6 1.19.06 1.63.06 5.98.06s4.79 0 5.98-.06c1.29-.06 2.42-.29 3.35-.6 1.08-.38 2.09-.99 2.98-1.89.9-.89 1.51-1.9 1.89-2.98.3-.93.53-2.06.6-3.35.06-1.19.06-1.63.06-5.98s0-4.79-.06-5.98c-.06-1.29-.29-2.42-.6-3.35a7.34 7.34 0 00-1.64-2.8C20.31.74 19.3.13 18.22-.25c-.93-.3-2.06-.53-3.35-.6-1.19-.06-1.63-.06-5.98-.06s-4.79 0-5.98.06C8.21.16 8.65.16 12 .16z" />
-              </svg>
+            <a href="#!" aria-label="Instagram" className="hover:text-pink-500">
+              <FaInstagram />
+            </a>
+            <a href="#!" aria-label="LinkedIn" className="hover:text-blue-300">
+              <FaLinkedin />
+            </a>
+            <a href="#!" aria-label="YouTube" className="hover:text-red-500">
+              <FaYoutube />
             </a>
           </div>
         </div>
-      </footer>
-    );
-  };
-  
-  export default Footer;
-  
+      </div>
+
+      {/* Bottom Line */}
+      <div className="mt-10 border-t border-white/20 pt-4 text-center">
+        <p className="text-sm">
+          Crafted with ❤️ by <strong>DineFusion Team</strong>. Savor the moment!
+        </p>
+      </div>
+    </footer>
+  );
+};
+
+export default Footer;

@@ -11,22 +11,27 @@ const MyOrdersPage = () => {
   // Fetch orders for the logged-in user
   useEffect(() => {
     const fetchOrders = async () => {
+      if (!user?.email) {
+        toast.error('User is not logged in.');
+        return;
+      }
+
       try {
-        const response = await axios.get(`http://localhost:3000/orders?email=${user?.email}`);
-        setOrders(response.data);
+        const response = await axios.get(`http://localhost:3000/my-orders?email=${user.email}`);
+        setOrders(response.data); // Only logged-in user's orders
       } catch (error) {
         console.error('Error fetching orders:', error);
         toast.error('Failed to fetch orders.');
       }
     };
 
-    if (user) fetchOrders();
+    fetchOrders();
   }, [user]);
 
   // Handle delete order
   const handleDelete = async (orderId) => {
     try {
-      const response = await axios.delete(`http://localhost:3000/orders/${orderId}`);
+      const response = await axios.delete(`http://localhost:3000/my-orders/${orderId}`);
       if (response.status === 200) {
         setOrders(orders.filter(order => order._id !== orderId)); // Remove deleted order from state
         toast.success('Order deleted successfully!');
