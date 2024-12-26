@@ -17,7 +17,7 @@ const MyOrdersPage = () => {
       }
 
       try {
-        const response = await axios.get(`http://localhost:3000/my-orders?email=${user.email}`);
+        const response = await axios.get(`https://restaurants-server-theta.vercel.app/my-orders?email=${user.email}`);
         setOrders(response.data); // Only logged-in user's orders
       } catch (error) {
         console.error('Error fetching orders:', error);
@@ -31,7 +31,7 @@ const MyOrdersPage = () => {
   // Handle delete order
   const handleDelete = async (orderId) => {
     try {
-      const response = await axios.delete(`http://localhost:3000/my-orders/${orderId}`);
+      const response = await axios.delete(`https://restaurants-server-theta.vercel.app/my-orders/${orderId}`);
       if (response.status === 200) {
         setOrders(orders.filter(order => order._id !== orderId)); // Remove deleted order from state
         toast.success('Order deleted successfully!');

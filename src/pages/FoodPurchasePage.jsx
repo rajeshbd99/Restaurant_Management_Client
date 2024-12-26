@@ -14,7 +14,7 @@ const FoodPurchasePage = () => {
 
   // Fetch food details using food id from API
   useEffect(() => {
-    fetch(`http://localhost:3000/foods/${id}`)
+    fetch(`https://restaurants-server-theta.vercel.app/foods/${id}`)
       .then((res) => {
         if (!res.ok) {
           throw new Error('Failed to fetch food details');
@@ -49,7 +49,7 @@ const FoodPurchasePage = () => {
     };
 
     // Send the order data to the backend (example: POST request to API)
-    fetch('http://localhost:3000/orders', {
+    fetch('https://restaurants-server-theta.vercel.app/orders', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(orderData),

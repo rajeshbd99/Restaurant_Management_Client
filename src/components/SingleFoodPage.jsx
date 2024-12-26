@@ -11,7 +11,7 @@ const SingleFoodPage = () => {
   useEffect(() => {
     const fetchFood = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/foods/${id}`);
+        const response = await fetch(`hhttps://restaurants-server-theta.vercel.app/foods/${id}`);
         if (!response.ok) {
           throw new Error(`Error fetching food: ${response.statusText}`);
         }

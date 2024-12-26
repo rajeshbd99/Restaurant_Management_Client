@@ -10,7 +10,7 @@ const Home = () => {
   const [topFoods, setTopFoods] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:3000/foods') // Replace with your API endpoint
+    fetch('https://restaurants-server-theta.vercel.app/foods') // Replace with your API endpoint
       .then((res) => res.json())
       .then((data) => {
         // Sort foods by purchase count (descending) to determine top-selling

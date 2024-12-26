@@ -12,7 +12,7 @@ const MyFoodsPage = () => {
 
   // Fetch foods added by the logged-in user
   useEffect(() => {
-    fetch(`http://localhost:3000/myfoods?email=${user.email}`)
+    fetch(`https://restaurants-server-theta.vercel.app/myfoods?email=${user.email}`)
       .then((res) => res.json())
       .then((data) => setFoods(data))
       .catch((error) => console.error('Error fetching user foods:', error));
@@ -24,7 +24,7 @@ const MyFoodsPage = () => {
   };
 
   const handleSave = () => {
-    fetch(`http://localhost:3000/foods/${selectedFood._id}`, {
+    fetch(`https://restaurants-server-theta.vercel.app/foods/${selectedFood._id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(selectedFood),
@@ -35,7 +35,7 @@ const MyFoodsPage = () => {
           toast.success('Food updated successfully!');
           setSelectedFood(null);
           // Refresh the food list
-          fetch(`http://localhost:3000/myfoods?email=${user.email}`)
+          fetch(`https://restaurants-server-theta.vercel.app/myfoods?email=${user.email}`)
             .then((res) => res.json())
             .then((data) => setFoods(data));
         } else {

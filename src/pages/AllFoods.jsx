@@ -13,7 +13,7 @@ const AllFoods = () => {
   // Fetch all foods initially
   useEffect(() => {
     setLoading(true); // Show loading state
-    fetch('http://localhost:3000/foods')
+    fetch('https://restaurants-server-theta.vercel.app/foods')
       .then((res) => res.json())
       .then((data) => {
         setFoods(data); // Set all foods

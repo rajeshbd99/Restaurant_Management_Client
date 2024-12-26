@@ -43,7 +43,7 @@ const AddFoodPage = () => {
     };
 
     try {
-      const response = await fetch('http://localhost:3000/add-foods', {
+      const response = await fetch('https://restaurants-server-theta.vercel.app/add-foods', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
