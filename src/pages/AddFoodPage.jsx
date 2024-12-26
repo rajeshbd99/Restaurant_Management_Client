@@ -4,7 +4,7 @@ import { AuthContext } from '../providers/AuthProvider';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const AddFood = () => {
+const AddFoodPage = () => {
   const { user } = useContext(AuthContext);
   const [formData, setFormData] = useState({
     image: '',
@@ -34,7 +34,7 @@ const AddFood = () => {
     };
 
     try {
-      const response = await fetch('http://localhost:3000/foods', {
+      const response = await fetch('http://localhost:3000/add-foods', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -211,4 +211,4 @@ const AddFood = () => {
   );
 };
 
-export default AddFood;
+export default AddFoodPage;

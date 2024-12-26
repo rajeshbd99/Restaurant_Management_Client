@@ -11,7 +11,7 @@ const SingleFoodPage = () => {
   useEffect(() => {
     const fetchFood = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/foods?search=${searchTerm}`);
+        const response = await fetch(`http://localhost:3000/foods/${id}`);
         if (!response.ok) {
           throw new Error(`Error fetching food: ${response.statusText}`);
         }
@@ -45,7 +45,7 @@ const SingleFoodPage = () => {
         <div className="w-full md:w-1/2">
           <h1 className="text-4xl font-bold mb-4">{food.name}</h1>
           <p className="text-lg mb-4">{food.description}</p>
-          <p className="text-xl font-semibold mb-4">Price: ${food.price.toFixed(2)}</p>
+          <p className="text-xl font-semibold mb-4">Price: ${food.price?.toFixed(2)}</p>
           <p className="text-lg mb-4">Available Quantity: {food.quantity}</p>
           <p className="text-lg mb-4">Purchase Count: {food.purchaseCount || 0}</p>
           <button

@@ -30,7 +30,7 @@ const FoodCard = ({ food }) => {
       </figure>
       <div className="card-body">
         <h2 className="card-title">{name}</h2>
-        <p>Price: ${price.toFixed(2)}</p>
+        <p>Price: ${typeof price === 'number' ? price.toFixed(2) : 'N/A'}</p>
         <p>Available: {quantity}</p>
 
         <div className="flex items-center gap-4">
