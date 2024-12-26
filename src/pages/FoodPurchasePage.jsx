@@ -14,7 +14,7 @@ const FoodPurchasePage = () => {
 
   // Fetch food details using food id from API
   useEffect(() => {
-    fetch(`http://localhost:3000/foods/${_id}`) // Replace with your actual API endpoint
+    fetch(`http://localhost:3000/foods/${id}`)
       .then((res) => {
         if (!res.ok) {
           throw new Error('Failed to fetch food details');
@@ -63,7 +63,7 @@ const FoodPurchasePage = () => {
       .then(() => {
         // Show success toast and navigate to another page (optional)
         toast.success('Purchase successful! Your order has been placed.');
-        navigate('/orders'); // Redirect to orders page
+        navigate('/my-orders'); // Redirect to orders page
       })
       .catch((error) => {
         console.error('Error making purchase:', error);

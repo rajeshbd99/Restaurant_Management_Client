@@ -29,37 +29,52 @@ const SingleFoodPage = () => {
   }, [id]);
 
   const handlePurchase = () => {
-    navigate(`/purchase/${_id}`); // Redirect to purchase page
+    navigate(`/purchase/${id}`); // Redirect to purchase page
   };
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
-  if (!food) return <div>Food not found</div>;
+  if (loading) return <div className="text-center text-xl font-semibold">Loading...</div>;
+  if (error) return <div className="text-center text-xl font-semibold text-red-500">Error: {error}</div>;
+  if (!food) return <div className="text-center text-xl font-semibold">Food not found</div>;
 
   return (
-    <div className="py-12 bg-gray-100">
-      <section className="container mx-auto flex flex-col md:flex-row gap-12">
+    <div className="bg-gray-50 py-16">
+      <section className="container mx-auto px-6 md:px-12 flex flex-col md:flex-row gap-12">
+        {/* Food Image Section */}
         <div className="w-full md:w-1/2">
-          <img src={food.image} alt={food.name} className="rounded-lg shadow-xl" />
+          <img
+            src={food.image}
+            alt={food.name}
+            className="w-full h-80 object-cover rounded-lg shadow-lg hover:scale-105 transition-all duration-300"
+          />
         </div>
-        <div className="w-full md:w-1/2">
-          <h1 className="text-4xl font-bold mb-4">{food.name}</h1>
-          <p className="text-lg mb-4">{food.description}</p>
-          <p className="text-xl font-semibold mb-4">Price: ${food.price?.toFixed(2)}</p>
-          <p className="text-lg mb-4">Available Quantity: {food.quantity}</p>
-          <p className="text-lg mb-4">Purchase Count: {food.purchaseCount || 0}</p>
+
+        {/* Food Details Section */}
+        <div className="w-full md:w-1/2 space-y-6">
+          <h1 className="text-3xl font-semibold text-gray-800">{food.name}</h1>
+          <p className="text-lg text-gray-600">{food.description}</p>
+          <p className="text-xl font-bold text-green-600">Price: ${food.price?.toFixed(2)}</p>
+          <p className="text-lg text-gray-600">Available Quantity: {food.quantity}</p>
+          <p className="text-lg text-gray-600">Purchase Count: {food.purchaseCount || 0}</p>
+
+          {/* Purchase Button */}
           <button
             onClick={handlePurchase}
-            className="btn btn-primary"
+            className={`px-6 py-3 mt-4 rounded-md text-white font-semibold transition-all duration-300 ${
+              food.quantity === 0
+                ? 'bg-gray-400 cursor-not-allowed'
+                : 'bg-indigo-600 hover:bg-indigo-700'
+            }`}
             disabled={food.quantity === 0}
           >
             {food.quantity === 0 ? 'Out of Stock' : 'Purchase'}
           </button>
         </div>
       </section>
-      <section className="container mx-auto py-8">
-        <h2 className="text-2xl font-semibold mb-4">Other Details</h2>
-        <p className="text-lg">{food.additionalInfo || 'No additional information available.'}</p>
+
+      {/* Additional Info Section */}
+      <section className="container mx-auto px-6 md:px-12 py-12 bg-white rounded-lg shadow-lg mt-12">
+        <h2 className="text-2xl font-semibold text-gray-800 mb-6">Additional Details</h2>
+        <p className="text-lg text-gray-600">{food.additionalInfo || 'No additional information available.'}</p>
       </section>
     </div>
   );
