@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import FoodCard from '../components/FoodCard';
+import { Circles } from 'react-loader-spinner';
 import backgroundImage from '../assets/bgAll.jpg';
 
 const AllFoods = () => {
@@ -43,6 +44,7 @@ const AllFoods = () => {
 
   return (
     <div>
+     
       {/* Page Title Section */}
       <div
         className="page-title text-center py-16 bg-cover bg-center text-white"
@@ -54,9 +56,10 @@ const AllFoods = () => {
           All Foods
         </h1>
       </div>
+      
 
       {/* Search Section */}
-      <section className="bg-gray-100 py-8 px-4">
+      <section className="py-8 px-4">
         <div className="container mx-auto flex justify-center items-center">
           <input
             type="text"
@@ -74,8 +77,23 @@ const AllFoods = () => {
         </div>
       </section>
 
+       {/* Show Spinner when loading */}
+       {loading ? (
+        <div className="flex justify-center items-center h-64">
+          <Circles
+            height="80"
+            width="80"
+            color="#4fa94d"
+            ariaLabel="circles-loading"
+            wrapperStyle={{}}
+            wrapperClass=""
+            visible={true}
+          />
+        </div>
+      ): null}
+
       {/* Food Cards Section */}
-      <section className="py-12 bg-white">
+      <section className="py-12">
         <div className="container mx-auto">
           {loading ? (
             <p className="text-center text-lg font-semibold">Loading foods...</p>

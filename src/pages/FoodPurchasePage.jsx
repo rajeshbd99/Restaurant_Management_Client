@@ -2,18 +2,20 @@ import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from '../providers/AuthProvider';
-import { toast } from 'react-toastify'; // Import toastify for notifications
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Spinner from '../components/Spinner'; // Import a spinner component
 
 const FoodPurchasePage = () => {
   const { id } = useParams(); // Get food id from URL
   const { user } = useContext(AuthContext); // Get the logged-in user details from context
   const [food, setFood] = useState(null);
   const [quantity, setQuantity] = useState(1);
+  const [loading, setLoading] = useState(true); // Track loading state
   const navigate = useNavigate();
 
-  // Fetch food details using food id from API
   useEffect(() => {
+    setLoading(true); // Start loading
     fetch(`https://restaurants-server-theta.vercel.app/foods/${id}`)
       .then((res) => {
         if (!res.ok) {
@@ -21,14 +23,17 @@ const FoodPurchasePage = () => {
         }
         return res.json();
       })
-      .then((data) => setFood(data))
+      .then((data) => {
+        setFood(data);
+        setLoading(false); // End loading
+      })
       .catch((error) => {
         console.error('Error fetching food details:', error);
         toast.error('Failed to load food details.');
+        setLoading(false); // End loading even if there's an error
       });
   }, [id]);
 
-  // Handle form submission to process the purchase
   const handlePurchase = () => {
     if (!food) {
       toast.error('Food details not available.');
@@ -48,7 +53,6 @@ const FoodPurchasePage = () => {
       buyerEmail: user.email,
     };
 
-    // Send the order data to the backend (example: POST request to API)
     fetch('https://restaurants-server-theta.vercel.app/orders', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -61,9 +65,8 @@ const FoodPurchasePage = () => {
         return response.json();
       })
       .then(() => {
-        // Show success toast and navigate to another page (optional)
         toast.success('Purchase successful! Your order has been placed.');
-        navigate('/my-orders'); // Redirect to orders page
+        navigate('/my-orders');
       })
       .catch((error) => {
         console.error('Error making purchase:', error);
@@ -71,18 +74,23 @@ const FoodPurchasePage = () => {
       });
   };
 
-  // Function to format price safely
   const formatPrice = (price) => {
     return typeof price === 'number' && !isNaN(price) ? price.toFixed(2) : 'N/A';
   };
 
-  if (!food) return <div>Loading...</div>;
+  if (loading) return <Spinner />; // Show spinner during loading
+
+  if (!food)
+    return (
+      <div className="container mx-auto py-12 text-center">
+        <h2 className="text-3xl text-gray-800">Food details not found.</h2>
+      </div>
+    );
 
   return (
     <div className="container mx-auto py-12">
       <h1 className="text-4xl font-bold mb-4">Purchase {food.name}</h1>
       <form className="space-y-6">
-        {/* Food Name */}
         <div className="mb-4">
           <label htmlFor="foodName" className="block text-lg font-semibold">Food Name</label>
           <input
@@ -94,7 +102,6 @@ const FoodPurchasePage = () => {
           />
         </div>
 
-        {/* Price */}
         <div className="mb-4">
           <label htmlFor="price" className="block text-lg font-semibold">Price</label>
           <input
@@ -106,7 +113,6 @@ const FoodPurchasePage = () => {
           />
         </div>
 
-        {/* Quantity */}
         <div className="mb-4">
           <label htmlFor="quantity" className="block text-lg font-semibold">Quantity</label>
           <input
@@ -125,7 +131,6 @@ const FoodPurchasePage = () => {
           </p>
         </div>
 
-        {/* Buyer Name (Read-only) */}
         <div className="mb-4">
           <label htmlFor="buyerName" className="block text-lg font-semibold">Buyer Name</label>
           <input
@@ -137,7 +142,6 @@ const FoodPurchasePage = () => {
           />
         </div>
 
-        {/* Buyer Email (Read-only) */}
         <div className="mb-4">
           <label htmlFor="buyerEmail" className="block text-lg font-semibold">Buyer Email</label>
           <input
@@ -149,7 +153,6 @@ const FoodPurchasePage = () => {
           />
         </div>
 
-        {/* Buying Date */}
         <div className="mb-4">
           <label htmlFor="buyingDate" className="block text-lg font-semibold">Buying Date</label>
           <input
@@ -161,7 +164,6 @@ const FoodPurchasePage = () => {
           />
         </div>
 
-        {/* Purchase Button */}
         <div className="mb-4">
           <button
             type="button"

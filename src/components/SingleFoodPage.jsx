@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import Spinner from '../components/Spinner'; // Import the Spinner component
 
 const SingleFoodPage = () => {
   const { id } = useParams(); // Get food ID from URL
@@ -11,7 +12,7 @@ const SingleFoodPage = () => {
   useEffect(() => {
     const fetchFood = async () => {
       try {
-        const response = await fetch(`hhttps://restaurants-server-theta.vercel.app/foods/${id}`);
+        const response = await fetch(`https://restaurants-server-theta.vercel.app/foods/${id}`); // Correct URL scheme
         if (!response.ok) {
           throw new Error(`Error fetching food: ${response.statusText}`);
         }
@@ -37,7 +38,7 @@ const SingleFoodPage = () => {
     return typeof price === 'number' && !isNaN(price) ? price.toFixed(2) : 'N/A';
   };
 
-  if (loading) return <div className="text-center text-xl font-semibold">Loading...</div>;
+  if (loading) return <Spinner />; // Show spinner while loading
   if (error) return <div className="text-center text-xl font-semibold text-red-500">Error: {error}</div>;
   if (!food) return <div className="text-center text-xl font-semibold">Food not found</div>;
 

@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../providers/AuthProvider';
 import { toast, ToastContainer } from 'react-toastify';
+import { Circles } from 'react-loader-spinner';
 import 'react-toastify/dist/ReactToastify.css';
 
 const AddFoodPage = () => {
@@ -16,6 +17,7 @@ const AddFoodPage = () => {
     price: '', // Initially as an empty string
   });
 
+  const [loading, setLoading] = useState(false); // Loading state
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -33,6 +35,7 @@ const AddFoodPage = () => {
       return;
     }
 
+    setLoading(true); // Start loading spinner
     const data = {
       ...formData,
       price, // Ensure price is a valid number
@@ -69,6 +72,8 @@ const AddFoodPage = () => {
         position: 'top-center',
         autoClose: 3000,
       });
+    } finally {
+      setLoading(false); // Stop loading spinner
     }
   };
 
@@ -77,143 +82,136 @@ const AddFoodPage = () => {
       <h2 className="text-4xl font-bold text-center mb-8 text-gradient">
         Add New Food Item
       </h2>
-      <form
-        onSubmit={handleSubmit}
-        className="max-w-lg mx-auto bg-white shadow-lg rounded-xl p-8 border border-gray-200"
-        style={{ background: 'linear-gradient(135deg, #f5f7fa, #c3cfe2)' }}
-      >
-        {/* Image URL */}
-        <div className="mb-5">
-          <label className="block text-lg font-semibold text-gray-800 mb-2">
-            Image URL
-          </label>
-          <input
-            type="text"
-            name="image"
-            value={formData.image}
-            onChange={handleChange}
-            className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400 shadow-sm"
-            required
+
+      {/* Show Spinner when loading */}
+      {loading ? (
+        <div className="flex justify-center items-center h-64">
+          <Circles
+            height="80"
+            width="80"
+            color="#4fa94d"
+            ariaLabel="circles-loading"
+            wrapperStyle={{}}
+            wrapperClass=""
+            visible={true}
           />
         </div>
-        {/* Food Name */}
-        <div className="mb-5">
-          <label className="block text-lg font-semibold text-gray-800 mb-2">
-            Food Name
-          </label>
-          <input
-            type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400 shadow-sm"
-            required
-          />
-        </div>
-        {/* Category */}
-        <div className="mb-5">
-          <label className="block text-lg font-semibold text-gray-800 mb-2">
-            Category
-          </label>
-          <input
-            type="text"
-            name="category"
-            value={formData.category}
-            onChange={handleChange}
-            className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400 shadow-sm"
-            required
-          />
-        </div>
-        {/* Origin */}
-        <div className="mb-5">
-          <label className="block text-lg font-semibold text-gray-800 mb-2">
-            Origin
-          </label>
-          <input
-            type="text"
-            name="origin"
-            value={formData.origin}
-            onChange={handleChange}
-            className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400 shadow-sm"
-            required
-          />
-        </div>
-        {/* Description */}
-        <div className="mb-5">
-          <label className="block text-lg font-semibold text-gray-800 mb-2">
-            Description
-          </label>
-          <textarea
-            name="description"
-            value={formData.description}
-            onChange={handleChange}
-            className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400 shadow-sm"
-            rows="4"
-            required
-          />
-        </div>
-        {/* Quantity and Price */}
-        <div className="grid grid-cols-2 gap-4">
+      ) : (
+        <form
+          onSubmit={handleSubmit}
+          className="max-w-lg mx-auto bg-white shadow-lg rounded-xl p-8 border border-gray-200"
+          style={{ background: 'linear-gradient(135deg, #f5f7fa, #c3cfe2)' }}
+        >
+          {/* Image URL */}
           <div className="mb-5">
             <label className="block text-lg font-semibold text-gray-800 mb-2">
-              Quantity
+              Image URL
             </label>
             <input
-              type="number"
-              name="quantity"
-              value={formData.quantity}
+              type="text"
+              name="image"
+              value={formData.image}
               onChange={handleChange}
               className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400 shadow-sm"
               required
             />
           </div>
+          {/* Food Name */}
           <div className="mb-5">
             <label className="block text-lg font-semibold text-gray-800 mb-2">
-              Price ($)
+              Food Name
             </label>
             <input
-              type="number"
-              name="price"
-              value={formData.price}
+              type="text"
+              name="name"
+              value={formData.name}
               onChange={handleChange}
               className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400 shadow-sm"
               required
             />
           </div>
-        </div>
-        {/* User Information */}
-        <div className="mb-5">
-          <label className="block text-lg font-semibold text-gray-800 mb-2">
-            User Email
-          </label>
-          <input
-            type="email"
-            value={user.email}
-            className="w-full p-3 border rounded-lg text-red-700 bg-gray-200 cursor-not-allowed shadow-sm"
-            readOnly
-          />
-        </div>
-        <div className="mb-5">
-          <label className="block text-lg font-semibold text-gray-800 mb-2">
-            User Name
-          </label>
-          <input
-            type="text"
-            value={user.displayName}
-            className="w-full p-3 border rounded-lg text-red-700 bg-gray-200 cursor-not-allowed shadow-sm"
-            readOnly
-          />
-        </div>
-        {/* Submit Button */}
-        <div className="text-center">
-          <button
-            type="submit"
-            className="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold py-3 rounded-lg shadow-md hover:shadow-lg hover:from-purple-600 hover:to-pink-600 transition-all"
-          >
-            Add Food
-          </button>
-        </div>
-      </form>
+          {/* Category */}
+          <div className="mb-5">
+            <label className="block text-lg font-semibold text-gray-800 mb-2">
+              Category
+            </label>
+            <input
+              type="text"
+              name="category"
+              value={formData.category}
+              onChange={handleChange}
+              className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400 shadow-sm"
+              required
+            />
+          </div>
+          {/* Origin */}
+          <div className="mb-5">
+            <label className="block text-lg font-semibold text-gray-800 mb-2">
+              Origin
+            </label>
+            <input
+              type="text"
+              name="origin"
+              value={formData.origin}
+              onChange={handleChange}
+              className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400 shadow-sm"
+              required
+            />
+          </div>
+          {/* Description */}
+          <div className="mb-5">
+            <label className="block text-lg font-semibold text-gray-800 mb-2">
+              Description
+            </label>
+            <textarea
+              name="description"
+              value={formData.description}
+              onChange={handleChange}
+              className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400 shadow-sm"
+              rows="4"
+              required
+            />
+          </div>
+          {/* Quantity and Price */}
+          <div className="grid grid-cols-2 gap-4">
+            <div className="mb-5">
+              <label className="block text-lg font-semibold text-gray-800 mb-2">
+                Quantity
+              </label>
+              <input
+                type="number"
+                name="quantity"
+                value={formData.quantity}
+                onChange={handleChange}
+                className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400 shadow-sm"
+                required
+              />
+            </div>
+            <div className="mb-5">
+              <label className="block text-lg font-semibold text-gray-800 mb-2">
+                Price ($)
+              </label>
+              <input
+                type="number"
+                name="price"
+                value={formData.price}
+                onChange={handleChange}
+                className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400 shadow-sm"
+                required
+              />
+            </div>
+          </div>
+          {/* Submit Button */}
+          <div className="text-center">
+            <button
+              type="submit"
+              className="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold py-3 rounded-lg shadow-md hover:shadow-lg hover:from-purple-600 hover:to-pink-600 transition-all"
+            >
+              Add Food
+            </button>
+          </div>
+        </form>
+      )}
       {/* Toast Notification Container */}
       <ToastContainer />
     </div>

@@ -5,24 +5,33 @@ import backgroundImage from '../../assets/banner.jpg';
 import specialDish1 from '../../assets/extra1.jpg';
 import specialDish2 from '../../assets/extra2.jpg';
 import specialDish3 from '../../assets/extra3.jpg';
+import { Circles } from 'react-loader-spinner';
 
 const Home = () => {
   const [topFoods, setTopFoods] = useState([]);
+  const [loading, setLoading] = useState(false); // Loading state for spinner
 
   useEffect(() => {
-    fetch('https://restaurants-server-theta.vercel.app/foods') // Replace with your API endpoint
-      .then((res) => res.json())
-      .then((data) => {
-        // Sort foods by purchase count (descending) to determine top-selling
-        const sortedFoods = data.sort((a, b) => b.purchaseCount - a.purchaseCount);
+    const fetchFoods = async () => {
+      setLoading(true); // Start spinner
+      try {
+        const response = await fetch('https://restaurants-server-theta.vercel.app/foods'); // Replace with your API endpoint
+        const data = await response.json();
+        const sortedFoods = data.sort((a, b) => b.purchaseCount - a.purchaseCount); // Sort foods by purchase count
         setTopFoods(sortedFoods);
-      })
-      .catch((error) => console.error('Error fetching top foods:', error));
+      } catch (error) {
+        console.error('Error fetching top foods:', error);
+      } finally {
+        setLoading(false); // Stop spinner
+      }
+    };
+
+    fetchFoods();
   }, []);
 
   return (
     <div className="bg-base-100">
-      {/*Banner Section */}
+      {/* Banner Section */}
       <section
         className="relative h-[600px] bg-cover bg-center flex items-center mt-10 mb-10 rounded-2xl"
         style={{
@@ -49,9 +58,6 @@ const Home = () => {
         </div>
       </section>
 
-
-
-
       {/* Top Foods Section */}
       <section className="py-16 bg-gradient-to-r from-orange-100 via-white to-orange-100 mt-10 mb-10 rounded-2xl">
         <div className="container mx-auto px-6 lg:px-20">
@@ -61,11 +67,23 @@ const Home = () => {
           <p className="text-center text-lg text-gray-600 mb-12 max-w-3xl mx-auto">
             Discover the best dishes curated just for you. Relish the flavors that have won hearts and taste buds alike!
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
-            {topFoods.slice(0, 6).map((food) => (
-              <TopFoodCard key={food._id} food={food} />
-            ))}
-          </div>
+          {loading ? (
+            <div className="flex justify-center items-center h-64">
+              <Circles
+                height="80"
+                width="80"
+                color="#4fa94d"
+                ariaLabel="circles-loading"
+                visible={true}
+              />
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+              {topFoods.slice(0, 6).map((food) => (
+                <TopFoodCard key={food._id} food={food} />
+              ))}
+            </div>
+          )}
           <div className="text-center mt-12">
             <NavLink
               to="/foods"
@@ -77,18 +95,15 @@ const Home = () => {
         </div>
       </section>
 
-
       {/* Chef's Specials Section */}
       <section className="py-16 bg-gradient-to-r from-yellow-100 via-white to-yellow-100 mt-10 mb-10 rounded-2xl">
         <div className="container mx-auto px-4">
           <h2 className="text-5xl font-extrabold text-center text-gray-900 mb-4">
             Chef's <span className="text-yellow-400">Specials</span>
           </h2>
-
           <p className="text-xl text-center text-gray-600 max-w-4xl mx-auto mb-12">
             Available for a limited time, don't miss the chance to savor these mouthwatering delights!
           </p>
-
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
             {[specialDish1, specialDish2, specialDish3].map((image, index) => (
               <div
@@ -118,105 +133,6 @@ const Home = () => {
           </div>
         </div>
       </section>
-
-
-      {/* Testimonials Section */}
-      <section className="py-16 bg-gradient-to-r from-red-100 via-white to-red-100 mb-10 rounded-2xl">
-        <div className="container mx-auto px-6">
-          {/* Heading */}
-          <h2 className="text-4xl font-extrabold text-center text-gray-800 mb-6">
-            What Our <span className="text-red-400">Customers</span> Say
-          </h2>
-
-          {/* Subheading */}
-          <p className="text-xl text-center text-gray-600 max-w-2xl mx-auto mb-12">
-            Our customers love our culinary creations and welcoming atmosphere. Here's what they have to say about their experiences at DineFusion.
-          </p>
-
-          {/* Testimonial Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 ">
-            {/* Testimonial 1 */}
-            <div
-              key={1}
-              className="card bg-white border-2 border-gray-200 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 ease-in-out transform hover:scale-105"
-            >
-              <div className="p-8">
-                <p className="text-lg text-gray-700 italic mb-6">
-                  "The food was absolutely fantastic, and the ambiance was perfect for our evening out. Can't wait to come back!"
-                </p>
-                <div className="flex items-center space-x-4">
-                  {/* Customer Image */}
-                  <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-gray-200">
-                    <img
-                      src="https://randomuser.me/api/portraits/women/1.jpg" // Use the actual image URL or path
-                      alt="Customer 1"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold text-gray-800">Alice Johnson</h3>
-                    <p className="text-sm text-gray-500">Food Enthusiast</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Testimonial 2 */}
-            <div
-              key={2}
-              className="card bg-white border-2 border-gray-200 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 ease-in-out transform hover:scale-105"
-            >
-              <div className="p-8">
-                <p className="text-lg text-gray-700 italic mb-6">
-                  "The food was absolutely fantastic, and the ambiance was perfect for our evening out. Can't wait to come back!"
-                </p>
-                <div className="flex items-center space-x-4">
-                  {/* Customer Image */}
-                  <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-gray-200">
-                    <img
-                      src="https://randomuser.me/api/portraits/men/1.jpg" // Use the actual image URL or path
-                      alt="Customer 2"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold text-gray-800">John Smith</h3>
-                    <p className="text-sm text-gray-500">Food Enthusiast</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Testimonial 3 */}
-            <div
-              key={3}
-              className="card bg-white border-2 border-gray-200 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 ease-in-out transform hover:scale-105"
-            >
-              <div className="p-8">
-                <p className="text-lg text-gray-700 italic mb-6">
-                  "The food was absolutely fantastic, and the ambiance was perfect for our evening out. Can't wait to come back!"
-                </p>
-                <div className="flex items-center space-x-4">
-                  {/* Customer Image */}
-                  <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-gray-200">
-                    <img
-                      src="https://randomuser.me/api/portraits/women/2.jpg" // Use the actual image URL or path
-                      alt="Customer 3"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold text-gray-800">Sarah Williams</h3>
-                    <p className="text-sm text-gray-500">Food Enthusiast</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-
     </div>
   );
 };
