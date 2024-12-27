@@ -121,7 +121,7 @@ const GalleryPage = () => {
 
       {/* Loading Spinner */}
       {loading && <div className="flex justify-center my-4">
-        <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-gray-900"></div>
+        <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-green-900"></div>
       </div>
       }
       {isEnd && <div className="text-center text-xl font-semibold my-4">No more images to load</div>}

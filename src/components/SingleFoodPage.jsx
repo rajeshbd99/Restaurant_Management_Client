@@ -43,7 +43,7 @@ const SingleFoodPage = () => {
   if (!food) return <div className="text-center text-xl font-semibold">Food not found</div>;
 
   return (
-    <div className="bg-gray-50 py-16">
+    <div className="py-16">
       <section className="container mx-auto px-6 md:px-12 flex flex-col md:flex-row gap-12">
         {/* Food Image Section */}
         <div className="w-full md:w-1/2">
@@ -78,7 +78,7 @@ const SingleFoodPage = () => {
       </section>
 
       {/* Additional Info Section */}
-      <section className="container mx-auto px-6 md:px-12 py-12 bg-white rounded-lg shadow-lg mt-12">
+      <section className="container mx-auto px-6 md:px-12 py-12 rounded-lg shadow-lg mt-12">
         <h2 className="text-2xl font-semibold text-gray-800 mb-6">Additional Details</h2>
         <p className="text-lg text-gray-600">{food.additionalInfo || 'No additional information available.'}</p>
       </section>

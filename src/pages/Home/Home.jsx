@@ -30,7 +30,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="bg-base-100">
+    <div className="">
       {/* Banner Section */}
       <section
         className="relative h-[600px] bg-cover bg-center flex items-center mt-10 mb-10 rounded-2xl"
