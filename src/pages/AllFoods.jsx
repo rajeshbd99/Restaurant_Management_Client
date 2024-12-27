@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import FoodCard from '../components/FoodCard';
 import { Circles } from 'react-loader-spinner';
 import backgroundImage from '../assets/bgAll.jpg';
+import { motion } from 'framer-motion';
 
 const AllFoods = () => {
   const [foods, setFoods] = useState([]); // Stores all foods
@@ -42,21 +43,31 @@ const AllFoods = () => {
     setLoading(false); // Hide loading state
   };
 
+  // Animation variants
+  const containerVariants = {
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: { opacity: 1, scale: 1, transition: { duration: 0.5, ease: 'easeOut' } },
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.3 } },
+  };
+
   return (
-    <div>
-     
+    <motion.div initial="hidden" animate="visible">
       {/* Page Title Section */}
-      <div
+      <motion.div
         className="page-title text-center py-16 bg-cover bg-center text-white"
         style={{
           backgroundImage: `url(${backgroundImage})`,
         }}
+        variants={containerVariants}
       >
         <h1 className="text-5xl font-bold bg-black bg-opacity-60 inline-block px-6 py-4 rounded-lg">
           All Foods
         </h1>
-      </div>
-      
+      </motion.div>
 
       {/* Search Section */}
       <section className="py-8 px-4">
@@ -77,8 +88,8 @@ const AllFoods = () => {
         </div>
       </section>
 
-       {/* Show Spinner when loading */}
-       {loading ? (
+      {/* Show Spinner when loading */}
+      {loading ? (
         <div className="flex justify-center items-center h-64">
           <Circles
             height="80"
@@ -90,11 +101,16 @@ const AllFoods = () => {
             visible={true}
           />
         </div>
-      ): null}
+      ) : null}
 
       {/* Food Cards Section */}
       <section className="py-12">
-        <div className="container mx-auto">
+        <motion.div
+          className="container mx-auto"
+          initial="hidden"
+          animate="visible"
+          variants={containerVariants}
+        >
           {loading ? (
             <p className="text-center text-lg font-semibold">Loading foods...</p>
           ) : message ? (
@@ -102,15 +118,28 @@ const AllFoods = () => {
           ) : filteredFoods.length === 0 ? (
             <p className="text-center text-lg font-semibold">No foods found!</p>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+            <motion.div
+              className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8"
+              initial="hidden"
+              animate="visible"
+              variants={{
+                hidden: { opacity: 0 },
+                visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
+              }}
+            >
               {filteredFoods.map((food) => (
-                <FoodCard key={food._id} food={food} />
+                <motion.div
+                  key={food._id}
+                  variants={cardVariants}
+                >
+                  <FoodCard food={food} />
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           )}
-        </div>
+        </motion.div>
       </section>
-    </div>
+    </motion.div>
   );
 };
 
