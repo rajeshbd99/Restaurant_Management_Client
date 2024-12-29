@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink,useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import TopFoodCard from '../../components/TopFoodCard';
 import backgroundImage from '../../assets/banner.jpg';
@@ -8,6 +8,11 @@ import specialDish3 from '../../assets/extra3.jpg';
 import { Circles } from 'react-loader-spinner';
 
 const Home = () => {
+  const location = useLocation();
+  useEffect(() => {
+    const pageTitle = "DineFusion | Home";
+    document.title = pageTitle;
+  }, [location]);
   const [topFoods, setTopFoods] = useState([]);
   const [loading, setLoading] = useState(false); // Loading state for spinner
 

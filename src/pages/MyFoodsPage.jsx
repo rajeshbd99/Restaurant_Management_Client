@@ -1,10 +1,15 @@
 import { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../providers/AuthProvider';
 import { toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Circles } from 'react-loader-spinner'; // Using react-loader-spinner
 
 const MyFoodsPage = () => {
+  const location = useLocation();
+  useEffect(() => {
+    const pageTitle = "DineFusion | My Foods";
+    document.title = pageTitle;
+  }, [location]);
   const { user } = useContext(AuthContext);
   const [foods, setFoods] = useState([]);
   const [selectedFood, setSelectedFood] = useState(null);

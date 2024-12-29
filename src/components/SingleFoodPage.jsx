@@ -1,8 +1,13 @@
 import { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate,useLocation } from 'react-router-dom';
 import Spinner from '../components/Spinner'; // Import the Spinner component
 
 const SingleFoodPage = () => {
+  const location = useLocation();
+  useEffect(() => {
+    const pageTitle = "DineFusion | Food";
+    document.title = pageTitle;
+  }, [location]);
   const { id } = useParams(); // Get food ID from URL
   const [food, setFood] = useState(null);
   const [loading, setLoading] = useState(true); // Track loading state

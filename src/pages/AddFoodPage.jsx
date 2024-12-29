@@ -1,11 +1,16 @@
-import React, { useState, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useContext,useEffect } from 'react';
+import { useNavigate,useLocation } from 'react-router-dom';
 import { AuthContext } from '../providers/AuthProvider';
 import { toast, ToastContainer } from 'react-toastify';
 import { Circles } from 'react-loader-spinner';
 import 'react-toastify/dist/ReactToastify.css';
 
 const AddFoodPage = () => {
+  const location = useLocation();
+  useEffect(() => {
+    const pageTitle = "DineFusion | Add Foods";
+    document.title = pageTitle;
+  }, [location]);
   const { user } = useContext(AuthContext);
   const [formData, setFormData] = useState({
     image: '',

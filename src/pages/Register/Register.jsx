@@ -11,7 +11,7 @@ import img1 from '../../assets/pngtree-character-default-avatar-image_2237203.jp
 const Register = () => {
     const location = useLocation();
     useEffect(() => {
-        const pageTitle = "Career Hub | Register";
+        const pageTitle = "DineFusion | Register";
         document.title = pageTitle;
     }, [location]);
 

@@ -4,8 +4,14 @@ import axios from 'axios';
 import moment from 'moment';
 import { toast } from 'react-toastify';
 import { Circles } from 'react-loader-spinner';
+import { useLocation } from 'react-router-dom';
 
 const MyOrdersPage = () => {
+  const location = useLocation();
+  useEffect(() => {
+    const pageTitle = "DineFusion | My Orders";
+    document.title = pageTitle;
+  }, [location]);
   const { user } = useContext(AuthContext); // Get logged-in user info
   const [orders, setOrders] = useState([]); // State to store user orders
   const [loading, setLoading] = useState(false); // Loading state for spinner

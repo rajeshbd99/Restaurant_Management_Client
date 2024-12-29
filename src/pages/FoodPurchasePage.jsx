@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate,useLocation } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from '../providers/AuthProvider';
 import { toast } from 'react-toastify';
@@ -7,6 +7,11 @@ import 'react-toastify/dist/ReactToastify.css';
 import Spinner from '../components/Spinner'; // Import a spinner component
 
 const FoodPurchasePage = () => {
+  const location = useLocation();
+  useEffect(() => {
+    const pageTitle = "DineFusion | Purchase Food";
+    document.title = pageTitle;
+  }, [location]);
   const { id } = useParams(); // Get food id from URL
   const { user } = useContext(AuthContext); // Get the logged-in user details from context
   const [food, setFood] = useState(null);

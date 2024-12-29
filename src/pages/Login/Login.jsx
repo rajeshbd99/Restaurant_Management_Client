@@ -8,7 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 const Login = () => {
   const location = useLocation();
   useEffect(() => {
-    const pageTitle = "Career Hub | Login";
+    const pageTitle = "DineFusion | Login";
     document.title = pageTitle;
   }, [location]);
 

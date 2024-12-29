@@ -1,11 +1,16 @@
 import { useState, useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink,useLocation } from 'react-router-dom';
 import FoodCard from '../components/FoodCard';
 import { Circles } from 'react-loader-spinner';
 import backgroundImage from '../assets/bgAll.jpg';
 import { motion } from 'framer-motion';
 
 const AllFoods = () => {
+  const location = useLocation();
+  useEffect(() => {
+    const pageTitle = "DineFusion | All Foods";
+    document.title = pageTitle;
+  }, [location]);
   const [foods, setFoods] = useState([]); // Stores all foods
   const [filteredFoods, setFilteredFoods] = useState([]); // Stores filtered foods (search results)
   const [searchTerm, setSearchTerm] = useState(''); // Search term

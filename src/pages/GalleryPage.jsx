@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import Lightbox from 'yet-another-react-lightbox';
 import 'yet-another-react-lightbox/styles.css'; // Import styles for the lightbox
 import { FaUserAlt } from 'react-icons/fa'; // Icon for user's name in the overlay
+import { useLocation } from 'react-router-dom';
 
 // Importing images
 import image1 from '../assets/1714827910980.jpeg';
@@ -19,6 +20,11 @@ import image12 from '../assets/12.jpg';
 import backgroundImage from '../assets/gallery.jpg';
 
 const GalleryPage = () => {
+  const location = useLocation();
+  useEffect(() => {
+    const pageTitle = "DineFusion | Gallery";
+    document.title = pageTitle;
+  }, [location]);
   const [currentImageIndex, setCurrentImageIndex] = useState(null); // To track the clicked image
   const [images, setImages] = useState([
     { src: image1, userName: 'John Doe', description: 'Delicious food dish 1' },
