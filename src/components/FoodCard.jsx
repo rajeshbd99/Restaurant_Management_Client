@@ -14,7 +14,7 @@ const FoodCard = ({ food }) => {
   const [purchaseQuantity, setPurchaseQuantity] = useState(1);
 
   const handleQuantityChange = (event) => {
-    const newQuantity = Math.min(event.target.value, quantity);
+    const newQuantity = Math.min(Math.max(1, event.target.value), quantity);
     setPurchaseQuantity(newQuantity);
   };
 
@@ -24,33 +24,33 @@ const FoodCard = ({ food }) => {
   };
 
   return (
-    <div className="max-w-sm mx-auto bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 mb-10 mt-10">
+    <div className="max-w-sm mx-auto bg-white rounded-lg shadow-lg overflow-hidden transform hover:scale-105 hover:shadow-xl transition duration-300 mb-10">
       {/* Image Section */}
       <div className="relative">
         <img
           src={image}
           alt={name}
-          className="w-full h-48 object-cover"
+          className="w-full h-56 object-cover"
         />
         {isOutOfStock && (
-          <div className="absolute top-0 left-0 bg-gray-800 bg-opacity-75 text-white text-sm px-3 py-1 rounded-br-lg">
+          <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center text-white text-lg font-semibold">
             Out of Stock
           </div>
         )}
       </div>
 
       {/* Content Section */}
-      <div className="p-5">
-        <h2 className="text-lg font-bold text-gray-800 truncate">{name}</h2>
-        <p className="text-gray-600 mt-2">
-          Price: <span className="font-semibold">${typeof price === 'number' ? price.toFixed(2) : 'N/A'}</span>
+      <div className="p-6">
+        <h2 className="text-xl font-bold text-gray-800 truncate">{name}</h2>
+        <p className="text-gray-500 mt-2">
+          <span className="font-semibold">Price:</span> ${typeof price === 'number' ? price.toFixed(2) : 'N/A'}
         </p>
-        <p className="text-gray-600">
-          Available: <span className="font-semibold">{quantity}</span>
+        <p className="text-gray-500">
+          <span className="font-semibold">Available:</span> {quantity}
         </p>
 
         {/* Purchase Controls */}
-        <div className="mt-4 flex items-center space-x-3">
+        <div className="mt-4 flex items-center space-x-4">
           <input
             type="number"
             min="1"
@@ -58,15 +58,15 @@ const FoodCard = ({ food }) => {
             value={purchaseQuantity}
             onChange={handleQuantityChange}
             disabled={isOutOfStock || isOwnFood}
-            className="w-16 border border-gray-300 rounded-lg px-2 py-1 focus:ring-2 focus:ring-indigo-500 focus:outline-none disabled:opacity-50"
+            className="w-20 h-10 border border-gray-300 rounded-md px-3 text-center text-gray-800 focus:ring-2 focus:ring-indigo-500 focus:outline-none disabled:opacity-50"
           />
           <button
             onClick={handlePurchase}
             disabled={isOutOfStock || isOwnFood || purchaseQuantity > quantity}
-            className={`px-4 py-2 text-sm font-semibold rounded-md transition-colors ${
+            className={`h-10 px-5 text-sm font-medium rounded-lg ${
               isOutOfStock || isOwnFood || purchaseQuantity > quantity
                 ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                : 'bg-indigo-600 text-white hover:bg-indigo-700'
+                : 'bg-indigo-600 text-white hover:bg-indigo-700 transition-colors'
             }`}
           >
             {isOutOfStock ? 'Out of Stock' : isOwnFood ? 'Cannot Buy' : 'Purchase'}
@@ -74,10 +74,10 @@ const FoodCard = ({ food }) => {
         </div>
 
         {/* Actions Section */}
-        <div className="mt-4 text-right">
+        <div className="mt-4">
           <NavLink
             to={`/foods/${_id}`}
-            className="text-indigo-600 font-medium hover:underline"
+            className="block text-indigo-600 text-center font-medium hover:underline"
           >
             View Details
           </NavLink>

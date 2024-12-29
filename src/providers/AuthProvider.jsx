@@ -1,6 +1,7 @@
 import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from 'firebase/auth';
 import { createContext, useEffect, useState } from 'react'
 import auth from '../firebase/firebase.init';
+import axios from 'axios';
 
 
 export const AuthContext = createContext(null);
@@ -23,26 +24,58 @@ const AuthProvider = ({ children }) => {
 
     useEffect(() => {
         const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
-            if (currentUser) {
-                console.log('User logged in:', currentUser);
-                setUser(currentUser);
-                setLoading(false);
-            } else {
-                console.log('No user logged in');
-                setUser(null);
+          if (currentUser) {
+            setUser(currentUser);
+            if (currentUser?.email) {
+              const user = { email: currentUser.email };
+    
+              axios
+                .post("https://restaurants-server-theta.vercel.app/jwt-auth", user, {
+                  withCredentials: true,
+                })
+                .then((response) => {})
+                .catch((error) => {
+                  alert("user authenticated failed!");
+    
+                  // console.log(error);
+                });
             }
-        })
-
+          } else {
+            setUser(null);
+          }
+          setLoading(false);
+        });
+    
         //component unmount , clean up
         return () => {
-            unSubscribe()
-        }
-    }, [user])
+          unSubscribe();
+        };
+      }, []);
 
-    const logoutUser = () => {
+      const logoutUser = async () => {
         setLoading(true);
-        return signOut(auth)
-    }
+        try {
+          // Send a logout request to the server
+          await axios.post("https://restaurants-server-theta.vercel.app/logout", {}, { withCredentials: true });
+    
+          // Clear all accessible cookies on the client side
+          document.cookie.split(";").forEach((cookie) => {
+            const eqPos = cookie.indexOf("=");
+            const name =
+              eqPos > -1 ? cookie.substr(0, eqPos).trim() : cookie.trim();
+            document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
+          });
+    
+          alert("Logged out successfully!");
+    
+          // Clear authentication state
+          await signOut(auth);
+        } catch (error) {
+          alert("An error occurred during logout.");
+        } finally {
+          setLoading(false);
+        }
+    };
 
     const googleSignIn = () => {
         setLoading(true);
