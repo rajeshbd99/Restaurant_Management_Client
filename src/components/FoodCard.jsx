@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 const FoodCard = ({ food }) => {
+  const navigate =useNavigate();
   const { name, image, price, quantity, _id, addedBy } = food;
 
   // Mocked logged-in user (replace with real logic if needed)
@@ -20,7 +21,8 @@ const FoodCard = ({ food }) => {
 
   const handlePurchase = () => {
     if (isOutOfStock || isOwnFood || purchaseQuantity > quantity) return;
-    alert(`Purchased ${purchaseQuantity} of ${name}`);
+      navigate(`/purchase/${_id}`); // Redirect to purchase page
+  
   };
 
   return (
@@ -69,7 +71,7 @@ const FoodCard = ({ food }) => {
                 : 'bg-indigo-600 text-white hover:bg-indigo-700 transition-colors'
             }`}
           >
-            {isOutOfStock ? 'Out of Stock' : isOwnFood ? 'Cannot Buy' : 'Purchase'}
+            {quantity<1 ? 'Out of Stock'  : 'Purchase'}
           </button>
         </div>
 

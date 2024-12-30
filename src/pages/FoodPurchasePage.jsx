@@ -51,6 +51,7 @@ const FoodPurchasePage = () => {
 
     const orderData = {
       foodId: food._id,
+      foodImage: food.image,
       foodName: food.name,
       price: food.price,
       quantity: quantity,

@@ -9,7 +9,7 @@ The frontend of this project is designed to enable users to:
 - Manage food items added by the user.
 
 ## Live URL
-You can access the live application at: [Live Application URL](https://restaurant-management-66f13.web.app/)
+You can access the live application at: [DineFusion](https://restaurant-management-66f13.web.app/)
 
 ## Key Features
 - **Responsive Design:** Ensures usability across devices of all sizes.

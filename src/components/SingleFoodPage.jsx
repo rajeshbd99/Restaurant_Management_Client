@@ -75,9 +75,9 @@ const SingleFoodPage = () => {
                 ? 'bg-gray-400 cursor-not-allowed'
                 : 'bg-indigo-600 hover:bg-indigo-700'
             }`}
-            disabled={food.quantity === 0}
+            disabled={food.quantity < 1}
           >
-            {food.quantity === 0 ? 'Out of Stock' : 'Purchase'}
+            {food.quantity < 1 ? 'Out of Stock' : 'Purchase'}
           </button>
         </div>
       </section>
