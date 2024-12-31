@@ -42,11 +42,11 @@ const router = createBrowserRouter([
         element: <AllFoods />,
       },
       {
-        path: '/foods/:id', // Dynamic route for single food page
+        path: '/foods/:id', 
         element: <SingleFoodPage />,
       },
       {
-        path: '/purchase/:id', // Private route for food purchase
+        path: '/purchase/:id', 
         element: (
           <PrivateRoute>
             <FoodPurchasePage />

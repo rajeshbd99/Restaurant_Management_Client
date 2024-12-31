@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
-import Spinner from '../components/Spinner'; // Import the Spinner component
+import Spinner from '../components/Spinner'; 
 
 const SingleFoodPage = () => {
   const location = useLocation();
@@ -8,10 +8,10 @@ const SingleFoodPage = () => {
     const pageTitle = "DineFusion | Food";
     document.title = pageTitle;
   }, [location]);
-  const { id } = useParams(); // Get food ID from URL
+  const { id } = useParams(); 
   const [food, setFood] = useState(null);
-  const [loading, setLoading] = useState(true); // Track loading state
-  const [error, setError] = useState(null); // Track error state
+  const [loading, setLoading] = useState(true); 
+  const [error, setError] = useState(null); 
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -35,15 +35,15 @@ const SingleFoodPage = () => {
   }, [id]);
 
   const handlePurchase = () => {
-    navigate(`/purchase/${id}`); // Redirect to purchase page
+    navigate(`/purchase/${id}`); 
   };
 
-  // Function to format price if it's a valid number
+
   const formatPrice = (price) => {
     return typeof price === 'number' && !isNaN(price) ? price.toFixed(2) : 'N/A';
   };
 
-  if (loading) return <Spinner />; // Show spinner while loading
+  if (loading) return <Spinner />; 
   if (error) return <div className="text-center text-xl font-semibold text-red-500">Error: {error}</div>;
   if (!food) return <div className="text-center text-xl font-semibold">Food not found</div>;
 

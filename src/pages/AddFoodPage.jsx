@@ -1,5 +1,5 @@
-import React, { useState, useContext,useEffect } from 'react';
-import { useNavigate,useLocation } from 'react-router-dom';
+import React, { useState, useContext, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { AuthContext } from '../providers/AuthProvider';
 import { toast, ToastContainer } from 'react-toastify';
 import { Circles } from 'react-loader-spinner';
@@ -19,10 +19,10 @@ const AddFoodPage = () => {
     origin: '',
     description: '',
     quantity: '',
-    price: '', // Initially as an empty string
+    price: '',
   });
 
-  const [loading, setLoading] = useState(false); // Loading state
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -32,18 +32,16 @@ const AddFoodPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Ensure price is a number, or show an error if it's invalid
     const price = parseFloat(formData.price);
     if (isNaN(price) || price <= 0) {
       toast.error('Please enter a valid price.');
       return;
     }
 
-    setLoading(true); // Start loading spinner
+    setLoading(true);
     const data = {
       ...formData,
-      price, // Ensure price is a valid number
+      price,
       addedByEmail: user.email,
       addedByName: user.displayName,
       purchaseCount: 0,
@@ -63,9 +61,9 @@ const AddFoodPage = () => {
       if (response.ok) {
         toast.success('Food item added successfully!', {
           position: 'top-center',
-          autoClose: 3000, // Show for 3 seconds
+          autoClose: 3000,
         });
-        setTimeout(() => navigate('/my-foods'), 3000); // Redirect after toast
+        setTimeout(() => navigate('/my-foods'), 3000);
       } else {
         toast.error('Failed to add food item. Please try again.', {
           position: 'top-center',
@@ -79,7 +77,7 @@ const AddFoodPage = () => {
         autoClose: 3000,
       });
     } finally {
-      setLoading(false); // Stop loading spinner
+      setLoading(false);
     }
   };
 

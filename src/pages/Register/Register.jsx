@@ -69,7 +69,7 @@ const Register = () => {
                     photoUrl: '',
                     email: '',
                     password: '',
-                }); 
+                });
                 e.target.reset();
                 setSuccess(true);
 

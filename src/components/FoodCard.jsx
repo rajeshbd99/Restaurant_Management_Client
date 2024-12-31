@@ -5,13 +5,11 @@ const FoodCard = ({ food }) => {
   const navigate =useNavigate();
   const { name, image, price, quantity, _id, addedBy } = food;
 
-  // Mocked logged-in user (replace with real logic if needed)
   const user = JSON.parse(localStorage.getItem('user'));
 
   const isOutOfStock = quantity === 0;
   const isOwnFood = user && user.id === addedBy;
 
-  // Manage purchase quantity
   const [purchaseQuantity, setPurchaseQuantity] = useState(1);
 
   const handleQuantityChange = (event) => {
@@ -21,7 +19,7 @@ const FoodCard = ({ food }) => {
 
   const handlePurchase = () => {
     if (isOutOfStock || isOwnFood || purchaseQuantity > quantity) return;
-      navigate(`/purchase/${_id}`); // Redirect to purchase page
+      navigate(`/purchase/${_id}`);
   
   };
 

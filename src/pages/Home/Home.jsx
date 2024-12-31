@@ -1,4 +1,4 @@
-import { NavLink,useLocation } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import TopFoodCard from '../../components/TopFoodCard';
 import backgroundImage from '../../assets/banner.jpg';
@@ -14,20 +14,20 @@ const Home = () => {
     document.title = pageTitle;
   }, [location]);
   const [topFoods, setTopFoods] = useState([]);
-  const [loading, setLoading] = useState(false); // Loading state for spinner
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchFoods = async () => {
-      setLoading(true); // Start spinner
+      setLoading(true);
       try {
-        const response = await fetch('https://restaurants-server-theta.vercel.app/foods'); // Replace with your API endpoint
+        const response = await fetch('https://restaurants-server-theta.vercel.app/foods');
         const data = await response.json();
-        const sortedFoods = data.sort((a, b) => b.purchaseCount - a.purchaseCount); // Sort foods by purchase count
+        const sortedFoods = data.sort((a, b) => b.purchaseCount - a.purchaseCount);
         setTopFoods(sortedFoods);
       } catch (error) {
         console.error('Error fetching top foods:', error);
       } finally {
-        setLoading(false); // Stop spinner
+        setLoading(false);
       }
     };
 

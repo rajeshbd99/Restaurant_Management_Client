@@ -2,23 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Global Styles */
+
 :root {
     --primary-500: #4caf50;
     --primary-700: #388e3c;
     --light-100: #fafafa;
     --light-800: #333333;
-    --dark-700: #2c2f33;  /* Dark background */
-    --dark-800: #1a1d21;  /* Dark background */
-    --dark-600: #3a3f47;  /* Slightly lighter dark background */
-    --light-300: #e0e0e0; /* Light gray */
-    --dark-300: #b0b0b0;  /* Darker gray for text */
-    --indigo-600: #3b82f6; /* Indigo color */
-    --indigo-700: #2563eb; /* Indigo color */
-    --gray-900: #181818; /* Darker gray for text */
-    --gray-600: #6b7280; /* Medium gray for less prominent text */
-    --white-900: #f1f1f1; /* Off white for dark mode */
-    --bg-dark: #121212;   /* Background color for dark mode */
+    --dark-700: #2c2f33;  
+    --dark-800: #1a1d21;  
+    --dark-600: #3a3f47;  
+    --light-300: #e0e0e0; 
+    --dark-300: #b0b0b0;  
+    --indigo-600: #3b82f6; 
+    --indigo-700: #2563eb; 
+    --gray-900: #181818; 
+    --gray-600: #6b7280; 
+    --white-900: #f1f1f1; 
+    --bg-dark: #121212;  
 }
 
 html, body {
@@ -35,66 +35,66 @@ html.dark {
     color: var(--white-900);
 }
 
-/* Dark Mode Text Colors */
+
 html.dark .text-gray-900 {
-    color: var(--white-900);  /* White text in dark mode */
+    color: var(--white-900);  
 }
 
 html.dark .text-gray-800 {
-    color: var(--gray-200);  /* Lighter gray text in dark mode */
+    color: var(--gray-200);  
 }
 
 html.dark .text-gray-700 {
-    color: var(--gray-300);  /* Even lighter gray text */
+    color: var(--gray-300);  
 }
 
 html.dark .text-gray-600 {
-    color: var(--gray-400);  /* Light gray text */
+    color: var(--gray-400);  
 }
 
 html.dark .text-gray-500 {
-    color: var(--gray-500);  /* Slightly muted gray */
+    color: var(--gray-500);  
 }
 
 html.dark .text-gray-400 {
-    color: var(--gray-600);  /* Lighter gray text */
+    color: var(--gray-600);  
 }
 
 html.dark .text-gray-300 {
-    color: var(--gray-700);  /* More subtle text for dark mode */
+    color: var(--gray-700);  
 }
 
 html.dark .text-gray-200 {
-    color: var(--gray-800);  /* Very light text for dark mode */
+    color: var(--gray-800);  
 }
 
 html.dark .text-gray-100 {
-    color: var(--gray-900);  /* Ultra-light gray text for dark mode */
+    color: var(--gray-900);  
 }
 
-/* Background Colors */
+
 html.light .bg-gray-50 {
-    background-color: var(--light-100);  /* Light background */
+    background-color: var(--light-100);  
 }
 
 html.dark .bg-gray-50 {
-    background-color: var(--gray-900);  /* Dark background for dark mode */
+    background-color: var(--gray-900);  
 }
 
 html.light .bg-white {
-    background-color: var(--light-100);  /* Light background */
+    background-color: var(--light-100);  
 }
 
 html.dark .bg-white {
-    background-color: var(--dark-800);  /* Darker background for dark mode */
+    background-color: var(--dark-800);  
 }
 
 html.light .bg-gray-100 {
-    background-color: var(--light-300);  /* Light background */
+    background-color: var(--light-300);  
 }
 
 html.dark .bg-gray-100 {
-    background-color: var(--dark-600);  /* Darker gray background for dark mode */
+    background-color: var(--dark-600);  
 }
 
 /* Navbar */
@@ -174,24 +174,24 @@ html.dark button:hover {
 
 /* Food Details Section */
 html.dark .food-card {
-    background-color: var(--dark-600);  /* Lighter dark for the card */
+    background-color: var(--dark-600);  
     border-color: var(--dark-700);
 }
 
 html.dark .food-card h1 {
-    color: var(--white-900);  /* Lighter text for better readability */
+    color: var(--white-900);  
 }
 
 html.dark .food-card p {
-    color: var(--dark-300);  /* Darker text */
+    color: var(--dark-300);  
 }
 
 html.dark .food-card .text-green-600 {
-    color: var(--primary-500);  /* Retain the price color */
+    color: var(--primary-500);  
 }
 
 html.dark .food-card .text-gray-500 {
-    color: var(--dark-300);  /* Lighter text */
+    color: var(--dark-300);  
 }
 
 html.dark .food-card button {

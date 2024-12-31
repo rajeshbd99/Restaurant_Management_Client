@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../providers/AuthProvider';
 import { toast } from 'react-toastify';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Circles } from 'react-loader-spinner'; // Using react-loader-spinner
+import { Circles } from 'react-loader-spinner';
 
 const MyFoodsPage = () => {
   const location = useLocation();
@@ -13,26 +13,26 @@ const MyFoodsPage = () => {
   const { user } = useContext(AuthContext);
   const [foods, setFoods] = useState([]);
   const [selectedFood, setSelectedFood] = useState(null);
-  const [loading, setLoading] = useState(true); // Add loading state
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   // Fetch foods added by the logged-in user
   useEffect(() => {
-    setLoading(true); // Set loading to true when fetching starts
+    setLoading(true);
     fetch(`https://restaurants-server-theta.vercel.app/foods`, { withCredentials: true })
       .then((res) => res.json())
       .then((data) => {
-        setFoods(data.filter((food) => food.addedByEmail === user.email)); // Filter foods by user email
-        setLoading(false); // Set loading to false when data is fetched
+        setFoods(data.filter((food) => food.addedByEmail === user.email));
+        setLoading(false);
       })
       .catch((error) => {
         console.error('Error fetching user foods:', error);
-        setLoading(false); // Ensure loading is false even on error
+        setLoading(false);
       });
   }, [user.email]);
 
   const handleUpdate = (food) => {
-    setSelectedFood(food); // Open modal with selected food
+    setSelectedFood(food);
   };
 
   const handleSave = () => {
@@ -47,8 +47,8 @@ const MyFoodsPage = () => {
         if (data.message) {
           toast.success('Food updated successfully!');
           setSelectedFood(null);
-          setLoading(true); // Show loading when refreshing data
-          fetch(`https://restaurants-server-theta.vercel.app/foods`, {withCredentials: true})
+          setLoading(true);
+          fetch(`https://restaurants-server-theta.vercel.app/foods`, { withCredentials: true })
             .then((res) => res.json())
             .then((data) => {
               setFoods(data.filter((food) => food.addedByEmail === user.email));
@@ -60,7 +60,7 @@ const MyFoodsPage = () => {
       })
       .catch((error) => console.error('Error updating food:', error));
   };
-  
+
 
   return (
     <div className="container mx-auto py-12">
@@ -100,66 +100,64 @@ const MyFoodsPage = () => {
       )}
 
       {/* Update Modal */}
-      {/* Update Modal */}
-{selectedFood && (
-  <div className="modal modal-open">
-    <div className="modal-box">
-      <h3 className="font-bold text-lg">Update Food</h3>
-      <form>
-        <label className="block mb-4">
-          Name:
-          <input
-            type="text"
-            value={selectedFood.name}
-            onChange={(e) =>
-              setSelectedFood({ ...selectedFood, name: e.target.value })
-            }
-            className="input input-bordered w-full mt-1"
-          />
-        </label>
-        <label className="block mb-4">
-          Price:
-          <input
-            type="number"
-            value={selectedFood.price}
-            onChange={(e) =>
-              setSelectedFood({ ...selectedFood, price: +e.target.value })
-            }
-            className="input input-bordered w-full mt-1"
-          />
-        </label>
-        <label className="block mb-4">
-          Image URL:
-          <input
-            type="text"
-            value={selectedFood.image}
-            onChange={(e) =>
-              setSelectedFood({ ...selectedFood, image: e.target.value })
-            }
-            className="input input-bordered w-full mt-1"
-          />
-        </label>
-        <div className="modal-action">
-          <button
-            type="button"
-            className="btn btn-primary"
-            onClick={handleSave}
-          >
-            Save
-          </button>
-          <button
-            type="button"
-            className="btn btn-secondary"
-            onClick={() => setSelectedFood(null)}
-          >
-            Cancel
-          </button>
+      {selectedFood && (
+        <div className="modal modal-open">
+          <div className="modal-box">
+            <h3 className="font-bold text-lg">Update Food</h3>
+            <form>
+              <label className="block mb-4">
+                Name:
+                <input
+                  type="text"
+                  value={selectedFood.name}
+                  onChange={(e) =>
+                    setSelectedFood({ ...selectedFood, name: e.target.value })
+                  }
+                  className="input input-bordered w-full mt-1"
+                />
+              </label>
+              <label className="block mb-4">
+                Price:
+                <input
+                  type="number"
+                  value={selectedFood.price}
+                  onChange={(e) =>
+                    setSelectedFood({ ...selectedFood, price: +e.target.value })
+                  }
+                  className="input input-bordered w-full mt-1"
+                />
+              </label>
+              <label className="block mb-4">
+                Image URL:
+                <input
+                  type="text"
+                  value={selectedFood.image}
+                  onChange={(e) =>
+                    setSelectedFood({ ...selectedFood, image: e.target.value })
+                  }
+                  className="input input-bordered w-full mt-1"
+                />
+              </label>
+              <div className="modal-action">
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={handleSave}
+                >
+                  Save
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  onClick={() => setSelectedFood(null)}
+                >
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
-      </form>
-    </div>
-  </div>
-)}
-
+      )}
     </div>
   );
 };

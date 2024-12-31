@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { NavLink,useLocation } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import FoodCard from '../components/FoodCard';
 import { Circles } from 'react-loader-spinner';
 import backgroundImage from '../assets/bgAll.jpg';
@@ -11,21 +11,21 @@ const AllFoods = () => {
     const pageTitle = "DineFusion | All Foods";
     document.title = pageTitle;
   }, [location]);
-  const [foods, setFoods] = useState([]); // Stores all foods
-  const [filteredFoods, setFilteredFoods] = useState([]); // Stores filtered foods (search results)
-  const [searchTerm, setSearchTerm] = useState(''); // Search term
+  const [foods, setFoods] = useState([]);
+  const [filteredFoods, setFilteredFoods] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState(''); // Message when no foods found
+  const [message, setMessage] = useState('');
 
   // Fetch all foods initially
   useEffect(() => {
-    setLoading(true); // Show loading state
+    setLoading(true);
     fetch('https://restaurants-server-theta.vercel.app/foods', { withCredentials: true })
       .then((res) => res.json())
       .then((data) => {
-        setFoods(data); // Set all foods
-        setFilteredFoods(data); // Set filtered foods to all initially
-        setLoading(false); // Hide loading state
+        setFoods(data);
+        setFilteredFoods(data);
+        setLoading(false);
       })
       .catch((error) => {
         console.error('Error fetching foods:', error);
@@ -37,15 +37,15 @@ const AllFoods = () => {
   // Handle search functionality
   const handleSearch = () => {
     setLoading(true);
-    setMessage(''); // Reset the message
+    setMessage('');
     const matchedFoods = foods.filter((food) =>
       food.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
     if (matchedFoods.length === 0) {
       setMessage('No foods found!');
     }
-    setFilteredFoods(matchedFoods); // Update the filtered foods with the matched results
-    setLoading(false); // Hide loading state
+    setFilteredFoods(matchedFoods);
+    setLoading(false);
   };
 
   // Animation variants
@@ -119,7 +119,7 @@ const AllFoods = () => {
           {loading ? (
             <p className="text-center text-lg font-semibold">Loading foods...</p>
           ) : message ? (
-            <p className="text-center text-lg font-semibold text-red-500">{message}</p> // Show message if no result
+            <p className="text-center text-lg font-semibold text-red-500">{message}</p>
           ) : filteredFoods.length === 0 ? (
             <p className="text-center text-lg font-semibold">No foods found!</p>
           ) : (

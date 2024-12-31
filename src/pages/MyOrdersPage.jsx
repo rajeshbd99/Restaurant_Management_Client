@@ -12,9 +12,9 @@ const MyOrdersPage = () => {
     const pageTitle = "DineFusion | My Orders";
     document.title = pageTitle;
   }, [location]);
-  const { user } = useContext(AuthContext); // Get logged-in user info
-  const [orders, setOrders] = useState([]); // State to store user orders
-  const [loading, setLoading] = useState(false); // Loading state for spinner
+  const { user } = useContext(AuthContext);
+  const [orders, setOrders] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   // Fetch orders for the logged-in user
   useEffect(() => {
@@ -23,18 +23,17 @@ const MyOrdersPage = () => {
         toast.error('User is not logged in.');
         return;
       }
-
-      setLoading(true); // Start spinner
+      setLoading(true);
       try {
         const response = await axios.get(
           `https://restaurants-server-theta.vercel.app/my-orders?email=${user.email}`, { withCredentials: true }
         );
-        setOrders(response.data); // Only logged-in user's orders
+        setOrders(response.data);
       } catch (error) {
         console.error('Error fetching orders:', error);
         toast.error('Failed to fetch orders.');
       } finally {
-        setLoading(false); // Stop spinner
+        setLoading(false);
       }
     };
 
@@ -43,7 +42,7 @@ const MyOrdersPage = () => {
 
   // Handle delete order
   const handleDelete = async (orderId) => {
-    setLoading(true); // Start spinner for delete action
+    setLoading(true);
     try {
       const response = await axios.delete(
         `https://restaurants-server-theta.vercel.app/orders/${orderId}`, { withCredentials: true }
@@ -51,15 +50,15 @@ const MyOrdersPage = () => {
       if (response.status === 200) {
         setOrders((prevOrders) => {
           const updatedOrders = prevOrders.filter((order) => order._id !== orderId);
-          toast.success('Order deleted successfully!'); // Trigger toast after filtering
-          return updatedOrders; // Update state
+          toast.success('Order deleted successfully!');
+          return updatedOrders;
         });
       }
     } catch (error) {
       console.error('Error deleting order:', error);
       toast.error('Failed to delete order.');
     } finally {
-      setLoading(false); // Stop spinner
+      setLoading(false);
     }
   };
 

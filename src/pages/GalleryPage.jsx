@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import Lightbox from 'yet-another-react-lightbox';
-import 'yet-another-react-lightbox/styles.css'; // Import styles for the lightbox
-import { FaUserAlt } from 'react-icons/fa'; // Icon for user's name in the overlay
+import 'yet-another-react-lightbox/styles.css';
+import { FaUserAlt } from 'react-icons/fa';
 import { useLocation } from 'react-router-dom';
 
-// Importing images
+
 import image1 from '../assets/1714827910980.jpeg';
 import image2 from '../assets/2.jpg';
 import image3 from '../assets/3.jpg';
@@ -25,7 +25,7 @@ const GalleryPage = () => {
     const pageTitle = "DineFusion | Gallery";
     document.title = pageTitle;
   }, [location]);
-  const [currentImageIndex, setCurrentImageIndex] = useState(null); // To track the clicked image
+  const [currentImageIndex, setCurrentImageIndex] = useState(null);
   const [images, setImages] = useState([
     { src: image1, userName: 'John Doe', description: 'Delicious food dish 1' },
     { src: image2, userName: 'Jane Smith', description: 'Appetizing dessert 2' },
@@ -39,9 +39,9 @@ const GalleryPage = () => {
     { src: image10, userName: 'Henry Adams', description: 'Tuna Sushi Rolls' },
     { src: image11, userName: 'Ivy Brown', description: 'Chocolate Cake' },
     { src: image12, userName: 'Jack White', description: 'Chocolate And Vanilla Ice Cream' },
-  ]); // Initial 12 images
-  const [loading, setLoading] = useState(false); // To track loading state for infinite scroll
-  const [isEnd, setIsEnd] = useState(false); // To track if we've loaded all images
+  ]);
+  const [loading, setLoading] = useState(false);
+  const [isEnd, setIsEnd] = useState(false);
 
   const additionalImages = [
     { src: image1, userName: 'New User 1', description: 'Extra dish 1' },
@@ -50,7 +50,7 @@ const GalleryPage = () => {
     { src: image4, userName: 'New User 4', description: 'Extra salad 4' },
     { src: image5, userName: 'New User 5', description: 'Extra pizza 5' },
     { src: image6, userName: 'New User 6', description: 'Extra soup 6' },
-  ]; // Additional images for infinite scroll simulation
+  ];
 
   // Handle the opening of the lightbox on image click
   const openLightbox = (index) => {
@@ -59,7 +59,7 @@ const GalleryPage = () => {
 
   // Infinite scroll functionality
   const handleScroll = () => {
-    if (isEnd || loading) return; // If loading or all images are loaded, do nothing
+    if (isEnd || loading) return;
     const bottom = window.innerHeight + document.documentElement.scrollTop >= document.documentElement.offsetHeight - 50;
     if (bottom) {
       loadMoreImages();
@@ -70,18 +70,18 @@ const GalleryPage = () => {
     setLoading(true);
     setTimeout(() => {
       if (additionalImages.length === 0) {
-        setIsEnd(true); // Mark as end if no more images to load
+        setIsEnd(true);
       } else {
-        setImages((prevImages) => [...prevImages, ...additionalImages]); // Append more images
+        setImages((prevImages) => [...prevImages, ...additionalImages]);
       }
       setLoading(false);
-    }, 1500); // Simulate API delay
+    }, 1500);
   };
 
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll); // Add scroll event listener
+    window.addEventListener('scroll', handleScroll);
     return () => {
-      window.removeEventListener('scroll', handleScroll); // Cleanup scroll event listener
+      window.removeEventListener('scroll', handleScroll);
     };
   }, [loading, isEnd]);
 
@@ -105,13 +105,13 @@ const GalleryPage = () => {
           <div
             key={index}
             className="relative group"
-            onClick={() => openLightbox(index)} // Open lightbox on image click
+            onClick={() => openLightbox(index)}
           >
             <img
               src={image.src}
               alt={`Food Image ${index + 1}`}
               className="w-full h-64 object-cover rounded-lg shadow-lg cursor-pointer opacity-0 transition-opacity duration-500"
-              onLoad={(e) => e.target.classList.add('opacity-100')} // Fade-in animation on image load
+              onLoad={(e) => e.target.classList.add('opacity-100')}
             />
             <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-50 transition-all rounded-lg"></div>
             <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all text-white text-center">
@@ -124,7 +124,7 @@ const GalleryPage = () => {
           </div>
         ))}
       </div>
-
+      
       {/* Loading Spinner */}
       {loading && <div className="flex justify-center my-4">
         <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-green-900"></div>
@@ -137,7 +137,7 @@ const GalleryPage = () => {
         <Lightbox
           open={true}
           index={currentImageIndex}
-          close={() => setCurrentImageIndex(null)} // Close the lightbox when clicked
+          close={() => setCurrentImageIndex(null)}
           slides={images.map((image) => ({ src: image.src }))}
         />
       )}

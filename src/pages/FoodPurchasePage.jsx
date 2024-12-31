@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
-import { useParams, useNavigate,useLocation } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from '../providers/AuthProvider';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Spinner from '../components/Spinner'; // Import a spinner component
+import Spinner from '../components/Spinner';
 
 const FoodPurchasePage = () => {
   const location = useLocation();
@@ -12,16 +12,16 @@ const FoodPurchasePage = () => {
     const pageTitle = "DineFusion | Purchase Food";
     document.title = pageTitle;
   }, [location]);
-  const { id } = useParams(); // Get food id from URL
-  const { user } = useContext(AuthContext); // Get the logged-in user details from context
+  const { id } = useParams();
+  const { user } = useContext(AuthContext);
   const [food, setFood] = useState(null);
   const [quantity, setQuantity] = useState(1);
-  const [loading, setLoading] = useState(true); // Track loading state
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
-    setLoading(true); // Start loading
-    fetch(`https://restaurants-server-theta.vercel.app/foods/${id}`,{ withCredentials: true })
+    setLoading(true);
+    fetch(`https://restaurants-server-theta.vercel.app/foods/${id}`, { withCredentials: true })
       .then((res) => {
         if (!res.ok) {
           throw new Error('Failed to fetch food details');
@@ -30,12 +30,12 @@ const FoodPurchasePage = () => {
       })
       .then((data) => {
         setFood(data);
-        setLoading(false); // End loading
+        setLoading(false);
       })
       .catch((error) => {
         console.error('Error fetching food details:', error);
         toast.error('Failed to load food details.');
-        setLoading(false); // End loading even if there's an error
+        setLoading(false);
       });
   }, [id]);
 
@@ -86,7 +86,7 @@ const FoodPurchasePage = () => {
     return typeof price === 'number' && !isNaN(price) ? price.toFixed(2) : 'N/A';
   };
 
-  if (loading) return <Spinner />; // Show spinner during loading
+  if (loading) return <Spinner />;
 
   if (!food)
     return (
@@ -171,7 +171,7 @@ const FoodPurchasePage = () => {
             className="input input-bordered w-full"
           />
         </div>
-
+        
         <div className="mb-4">
           <button
             type="button"
