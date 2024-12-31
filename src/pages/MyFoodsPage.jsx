@@ -40,6 +40,7 @@ const MyFoodsPage = () => {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       withCredentials: true,
+      credentials: 'include',
       body: JSON.stringify(selectedFood),
     })
       .then((res) => res.json())
@@ -80,32 +81,39 @@ const MyFoodsPage = () => {
           />
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {foods.map((food) => (
-            <div key={food._id} className="card">
-              <img src={food.image} alt={food.name} className="w-full h-40 object-cover" />
-              <div className="p-4">
-                <h2 className="text-xl font-semibold">{food.name}</h2>
-                <p>Price: ${food.price}</p>
-                <button
-                  className="btn btn-primary mt-4"
-                  onClick={() => handleUpdate(food)}
-                >
-                  Update
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+  {foods.map((food) => (
+    <div key={food._id} className="bg-white rounded-lg shadow-lg overflow-hidden transition-transform transform hover:scale-105 hover:shadow-xl">
+      <div className="relative">
+        <img
+          src={food.image}
+          alt={food.name}
+          className="w-full h-56 object-cover object-center"
+        />
+      </div>
+      <div className="p-4">
+        <h2 className="text-2xl font-semibold text-gray-800 truncate">{food.name}</h2>
+        <p className="text-lg text-gray-600 mt-2">Price: ${food.price}</p>
+        <button
+          className="mt-4 px-6 py-2 bg-indigo-600 text-white font-semibold rounded-md hover:bg-indigo-700 transition-all"
+          onClick={() => handleUpdate(food)}
+        >
+          Update
+        </button>
+      </div>
+    </div>
+  ))}
+</div>
+
       )}
 
       {/* Update Modal */}
       {selectedFood && (
         <div className="modal modal-open">
           <div className="modal-box">
-            <h3 className="font-bold text-lg">Update Food</h3>
+            <h3 className="font-bold text-lg text-slate-500">Update Food</h3>
             <form>
-              <label className="block mb-4">
+              <label className="block mb-4 text-slate-500">
                 Name:
                 <input
                   type="text"
@@ -116,7 +124,7 @@ const MyFoodsPage = () => {
                   className="input input-bordered w-full mt-1"
                 />
               </label>
-              <label className="block mb-4">
+              <label className="block mb-4 text-slate-500">
                 Price:
                 <input
                   type="number"
@@ -127,7 +135,7 @@ const MyFoodsPage = () => {
                   className="input input-bordered w-full mt-1"
                 />
               </label>
-              <label className="block mb-4">
+              <label className="block mb-4 text-slate-500">
                 Image URL:
                 <input
                   type="text"
