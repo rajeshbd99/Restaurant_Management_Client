@@ -2,7 +2,8 @@ import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged,
 import { createContext, useEffect, useState } from 'react'
 import auth from '../firebase/firebase.init';
 import axios from 'axios';
-
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const AuthContext = createContext(null);
 const googleProvider = new GoogleAuthProvider();
@@ -66,7 +67,10 @@ const AuthProvider = ({ children }) => {
             document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
           });
     
-          alert("Logged out successfully!");
+          toast.success("Logged out successfully!", {
+            position: "top-center",
+            autoClose: 3000,
+          });
     
           // Clear authentication state
           await signOut(auth);
@@ -93,6 +97,7 @@ const AuthProvider = ({ children }) => {
     return (
         <AuthContext.Provider value={authInfo}>
             {children}
+            {/* <ToastContainer /> */}
         </AuthContext.Provider>
     )
 }

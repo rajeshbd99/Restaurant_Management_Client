@@ -19,6 +19,7 @@ const App = () => {
     <Router>
       <div className="flex flex-col min-h-screen">
         <Header />
+        <ToastContainer />
         <main className="flex-grow bg-base-100">
           <Routes>
             <Route path="/" element={<Home />} />

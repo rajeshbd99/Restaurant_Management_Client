@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams, useNavigate,useLocation } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import Spinner from '../components/Spinner'; // Import the Spinner component
 
 const SingleFoodPage = () => {
@@ -17,7 +17,7 @@ const SingleFoodPage = () => {
   useEffect(() => {
     const fetchFood = async () => {
       try {
-        const response = await fetch(`https://restaurants-server-theta.vercel.app/foods/${id}`); // Correct URL scheme
+        const response = await fetch(`https://restaurants-server-theta.vercel.app/foods/${id}`, { withCredentials: true }); // Correct URL scheme
         if (!response.ok) {
           throw new Error(`Error fetching food: ${response.statusText}`);
         }
@@ -70,14 +70,13 @@ const SingleFoodPage = () => {
           {/* Purchase Button */}
           <button
             onClick={handlePurchase}
-            className={`px-6 py-3 mt-4 rounded-md text-white font-semibold transition-all duration-300 ${
-              food.quantity === 0
-                ? 'bg-gray-400 cursor-not-allowed'
-                : 'bg-indigo-600 hover:bg-indigo-700'
-            }`}
-            disabled={food.quantity < 1}
+            className={`px-6 py-3 mt-4 rounded-md text-white font-semibold transition-all duration-300 ${food.quantity > 0
+                ? 'bg-indigo-600 hover:bg-indigo-700'
+                : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+              }`}
+            disabled={food.quantity <= 0}
           >
-            {food.quantity < 1 ? 'Out of Stock' : 'Purchase'}
+            {food.quantity > 0 ? 'Purchase' : 'Out of Stock'}
           </button>
         </div>
       </section>

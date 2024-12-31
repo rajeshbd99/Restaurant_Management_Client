@@ -40,7 +40,7 @@ const Header = () => {
     if (user) {
       try {
         await logoutUser();
-        alert('User logged out, navigating to home');
+        toast.success('User logged out, navigating to home');
         navigate('/');
       } catch (error) {
         console.error('Error logging out:', error.message);
@@ -75,7 +75,10 @@ const Header = () => {
     >
       <div className="container mx-auto flex items-center justify-between">
         {/* Logo */}
-        <div className="text-2xl font-bold cursor-pointer hover:text-red-600" onClick={() => navigate('/')}>
+        <div
+          className="text-2xl font-bold cursor-pointer hover:text-red-600"
+          onClick={() => navigate('/')}
+        >
           🍴 DineFusion
         </div>
 
@@ -115,11 +118,13 @@ const Header = () => {
 
         {/* Theme Toggle & User Section */}
         <div className="flex items-center space-x-4">
+          {/* Theme Toggle Icon */}
           <button
             onClick={toggleTheme}
-            className="hidden md:block text-sm px-4 py-2 rounded-md border-2 border-transparent hover:border-gray-300 dark:hover:border-gray-700"
+            className="text-xl text-gray-700 dark:text-yellow-400 hover:text-black dark:hover:text-yellow-500 transition"
+            aria-label="Toggle Dark Mode"
           >
-            {isDarkMode ? 'Light Mode ☀️' : 'Dark Mode 🌙'}
+            {isDarkMode ? '☀️' : '🌙'}
           </button>
 
           {user ? (
@@ -166,12 +171,20 @@ const Header = () => {
               </button>
             </>
           ) : (
-            <NavLink
-              to="/login"
-              className="hidden md:block px-4 py-2 rounded-md bg-red-500 text-white hover:bg-red-600 transition"
-            >
-              Login
-            </NavLink>
+            <>
+              <NavLink
+                to="/login"
+                className="hidden md:block px-4 py-2 rounded-md bg-blue-500 text-white hover:bg-blue-600 transition"
+              >
+                Login
+              </NavLink>
+              <NavLink
+                to="/register"
+                className="hidden md:block px-4 py-2 rounded-md bg-green-500 text-white hover:bg-green-600 transition"
+              >
+                Register
+              </NavLink>
+            </>
           )}
 
           {/* Mobile Menu Toggle */}
@@ -218,6 +231,24 @@ const Header = () => {
                 Gallery
               </NavLink>
             </li>
+            {user ? (
+              <li className="hover:bg-gray-200 px-4 py-2">
+                <button onClick={handleLogout}>Logout</button>
+              </li>
+            ) : (
+              <>
+                <li className="hover:bg-gray-200 px-4 py-2">
+                  <NavLink to="/login" onClick={closeMenus}>
+                    Login
+                  </NavLink>
+                </li>
+                <li className="hover:bg-gray-200 px-4 py-2">
+                  <NavLink to="/register" onClick={closeMenus}>
+                    Register
+                  </NavLink>
+                </li>
+              </>
+            )}
           </ul>
         </nav>
       )}

@@ -21,7 +21,7 @@ const FoodPurchasePage = () => {
 
   useEffect(() => {
     setLoading(true); // Start loading
-    fetch(`https://restaurants-server-theta.vercel.app/foods/${id}`)
+    fetch(`https://restaurants-server-theta.vercel.app/foods/${id}`,{ withCredentials: true })
       .then((res) => {
         if (!res.ok) {
           throw new Error('Failed to fetch food details');
@@ -62,6 +62,8 @@ const FoodPurchasePage = () => {
     fetch('https://restaurants-server-theta.vercel.app/orders', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
+      withCredentials: true,
+      credentials: 'include',
       body: JSON.stringify(orderData),
     })
       .then((response) => {

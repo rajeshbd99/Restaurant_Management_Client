@@ -19,7 +19,7 @@ const MyFoodsPage = () => {
   // Fetch foods added by the logged-in user
   useEffect(() => {
     setLoading(true); // Set loading to true when fetching starts
-    fetch(`https://restaurants-server-theta.vercel.app/foods`)
+    fetch(`https://restaurants-server-theta.vercel.app/foods`, { withCredentials: true })
       .then((res) => res.json())
       .then((data) => {
         setFoods(data.filter((food) => food.addedByEmail === user.email)); // Filter foods by user email
@@ -39,6 +39,7 @@ const MyFoodsPage = () => {
     fetch(`https://restaurants-server-theta.vercel.app/foods/${selectedFood._id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
+      withCredentials: true,
       body: JSON.stringify(selectedFood),
     })
       .then((res) => res.json())
@@ -47,7 +48,7 @@ const MyFoodsPage = () => {
           toast.success('Food updated successfully!');
           setSelectedFood(null);
           setLoading(true); // Show loading when refreshing data
-          fetch(`https://restaurants-server-theta.vercel.app/foods`)
+          fetch(`https://restaurants-server-theta.vercel.app/foods`, {withCredentials: true})
             .then((res) => res.json())
             .then((data) => {
               setFoods(data.filter((food) => food.addedByEmail === user.email));

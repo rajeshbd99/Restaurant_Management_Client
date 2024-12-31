@@ -27,7 +27,7 @@ const MyOrdersPage = () => {
       setLoading(true); // Start spinner
       try {
         const response = await axios.get(
-          `https://restaurants-server-theta.vercel.app/my-orders?email=${user.email}`
+          `https://restaurants-server-theta.vercel.app/my-orders?email=${user.email}`, { withCredentials: true }
         );
         setOrders(response.data); // Only logged-in user's orders
       } catch (error) {
@@ -46,7 +46,7 @@ const MyOrdersPage = () => {
     setLoading(true); // Start spinner for delete action
     try {
       const response = await axios.delete(
-        `https://restaurants-server-theta.vercel.app/orders/${orderId}`
+        `https://restaurants-server-theta.vercel.app/orders/${orderId}`, { withCredentials: true }
       );
       if (response.status === 200) {
         setOrders((prevOrders) => {
