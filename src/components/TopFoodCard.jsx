@@ -37,7 +37,7 @@ const TopFoodCard = ({ food }) => {
           >
             View Details
           </NavLink>
-          <span className="text-sm text-gray-400 italic">
+          <span className="text-sm text-slate-500 italic">
             Limited Stock Available
           </span>
         </div>

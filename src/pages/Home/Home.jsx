@@ -66,10 +66,10 @@ const Home = () => {
       {/* Top Foods Section */}
       <section className="py-16 bg-gradient-to-r from-orange-100 via-white to-orange-100 mt-10 mb-10 rounded-2xl">
         <div className="container mx-auto px-6 lg:px-20">
-          <h2 className="text-4xl font-extrabold text-gray-800 text-center mb-12">
+          <h2 className="text-4xl font-extrabold text-slate-800 text-center mb-12">
             Explore Our <span className="text-orange-400">Top Foods</span>
           </h2>
-          <p className="text-center text-lg text-gray-600 mb-12 max-w-3xl mx-auto">
+          <p className="text-center text-lg text-slate-600 mb-12 max-w-3xl mx-auto">
             Discover the best dishes curated just for you. Relish the flavors that have won hearts and taste buds alike!
           </p>
           {loading ? (
@@ -92,7 +92,7 @@ const Home = () => {
           <div className="text-center mt-12">
             <NavLink
               to="/foods"
-              className="inline-block px-8 py-4 bg-yellow-500 text-white font-semibold rounded-full shadow-lg hover:bg-yellow-400 hover:shadow-xl transition duration-300"
+              className="inline-block px-8 py-4 bg-yellow-600 text-white font-semibold rounded-full shadow-lg hover:bg-yellow-500 hover:shadow-xl transition duration-300"
             >
               Browse All Foods
             </NavLink>
@@ -103,10 +103,10 @@ const Home = () => {
       {/* Chef's Specials Section */}
       <section className="py-16 bg-gradient-to-r from-yellow-100 via-white to-yellow-100 mt-10 mb-10 rounded-2xl">
         <div className="container mx-auto px-4">
-          <h2 className="text-5xl font-extrabold text-center text-gray-900 mb-4">
+          <h2 className="text-5xl font-extrabold text-center text-slate-900 mb-4">
             Chef's <span className="text-yellow-400">Specials</span>
           </h2>
-          <p className="text-xl text-center text-gray-600 max-w-4xl mx-auto mb-12">
+          <p className="text-xl text-center text-slate-600 max-w-4xl mx-auto mb-12">
             Available for a limited time, don't miss the chance to savor these mouthwatering delights!
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">

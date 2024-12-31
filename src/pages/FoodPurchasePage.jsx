@@ -96,11 +96,11 @@ const FoodPurchasePage = () => {
     );
 
   return (
-    <div className="container mx-auto py-12">
-      <h1 className="text-4xl font-bold mb-4">Purchase {food.name}</h1>
+    <div className="container mx-auto py-12 text-slate-700">
+      <h1 className="text-4xl font-bold mb-4 text-center text-slate-500">Purchase {food.name}</h1>
       <form className="space-y-6">
         <div className="mb-4">
-          <label htmlFor="foodName" className="block text-lg font-semibold">Food Name</label>
+          <label htmlFor="foodName" className="block text-lg text-slate-500 font-semibold">Food Name</label>
           <input
             type="text"
             id="foodName"
@@ -111,7 +111,7 @@ const FoodPurchasePage = () => {
         </div>
 
         <div className="mb-4">
-          <label htmlFor="price" className="block text-lg font-semibold">Price</label>
+          <label htmlFor="price" className="block text-lg font-semibold text-slate-500">Price</label>
           <input
             type="text"
             id="price"
@@ -122,7 +122,7 @@ const FoodPurchasePage = () => {
         </div>
 
         <div className="mb-4">
-          <label htmlFor="quantity" className="block text-lg font-semibold">Quantity</label>
+          <label htmlFor="quantity" className="block text-lg font-semibold text-slate-500">Quantity</label>
           <input
             type="number"
             id="quantity"
@@ -132,7 +132,7 @@ const FoodPurchasePage = () => {
             onChange={(e) => setQuantity(Math.min(Math.max(e.target.value, 1), food.quantity))}
             className="input input-bordered w-full"
           />
-          <p className="text-sm text-gray-500">
+          <p className="text-sm text-slate-500">
             {food.quantity === 0
               ? 'This food is out of stock.'
               : `Available quantity: ${food.quantity}`}
@@ -140,7 +140,7 @@ const FoodPurchasePage = () => {
         </div>
 
         <div className="mb-4">
-          <label htmlFor="buyerName" className="block text-lg font-semibold">Buyer Name</label>
+          <label htmlFor="buyerName" className="block text-lg font-semibold text-slate-500">Buyer Name</label>
           <input
             type="text"
             id="buyerName"
@@ -151,7 +151,7 @@ const FoodPurchasePage = () => {
         </div>
 
         <div className="mb-4">
-          <label htmlFor="buyerEmail" className="block text-lg font-semibold">Buyer Email</label>
+          <label htmlFor="buyerEmail" className="block text-lg font-semibold text-slate-500">Buyer Email</label>
           <input
             type="email"
             id="buyerEmail"
@@ -162,7 +162,7 @@ const FoodPurchasePage = () => {
         </div>
 
         <div className="mb-4">
-          <label htmlFor="buyingDate" className="block text-lg font-semibold">Buying Date</label>
+          <label htmlFor="buyingDate" className="block text-lg font-semibold text-slate-500">Buying Date</label>
           <input
             type="text"
             id="buyingDate"

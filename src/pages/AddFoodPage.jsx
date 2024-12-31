@@ -110,7 +110,7 @@ const AddFoodPage = () => {
         >
           {/* Image URL */}
           <div className="mb-5">
-            <label className="block text-lg font-semibold text-gray-800 mb-2">
+            <label className="block text-lg font-semibold text-slate-500 mb-2">
               Image URL
             </label>
             <input
@@ -118,13 +118,13 @@ const AddFoodPage = () => {
               name="image"
               value={formData.image}
               onChange={handleChange}
-              className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400 shadow-sm"
+              className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400 shadow-sm text-slate-500"
               required
             />
           </div>
           {/* Food Name */}
           <div className="mb-5">
-            <label className="block text-lg font-semibold text-gray-800 mb-2">
+            <label className="block text-lg font-semibold text-slate-500 mb-2">
               Food Name
             </label>
             <input
@@ -132,13 +132,13 @@ const AddFoodPage = () => {
               name="name"
               value={formData.name}
               onChange={handleChange}
-              className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400 shadow-sm"
+              className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400 shadow-sm text-slate-500"
               required
             />
           </div>
           {/* Category */}
           <div className="mb-5">
-            <label className="block text-lg font-semibold text-gray-800 mb-2">
+            <label className="block text-lg font-semibold text-slate-500 mb-2">
               Category
             </label>
             <input
@@ -146,13 +146,13 @@ const AddFoodPage = () => {
               name="category"
               value={formData.category}
               onChange={handleChange}
-              className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400 shadow-sm"
+              className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400 shadow-sm text-slate-500"
               required
             />
           </div>
           {/* Origin */}
           <div className="mb-5">
-            <label className="block text-lg font-semibold text-gray-800 mb-2">
+            <label className="block text-lg font-semibold text-slate-500 mb-2">
               Origin
             </label>
             <input
@@ -160,20 +160,20 @@ const AddFoodPage = () => {
               name="origin"
               value={formData.origin}
               onChange={handleChange}
-              className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400 shadow-sm"
+              className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400 shadow-sm text-slate-500"
               required
             />
           </div>
           {/* Description */}
           <div className="mb-5">
-            <label className="block text-lg font-semibold text-gray-800 mb-2">
+            <label className="block text-lg font-semibold text-slate-500 mb-2">
               Description
             </label>
             <textarea
               name="description"
               value={formData.description}
               onChange={handleChange}
-              className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400 shadow-sm"
+              className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400 shadow-sm text-slate-500"
               rows="4"
               required
             />
@@ -181,7 +181,7 @@ const AddFoodPage = () => {
           {/* Quantity and Price */}
           <div className="grid grid-cols-2 gap-4">
             <div className="mb-5">
-              <label className="block text-lg font-semibold text-gray-800 mb-2">
+              <label className="block text-lg font-semibold text-slate-500 mb-2">
                 Quantity
               </label>
               <input
@@ -189,12 +189,12 @@ const AddFoodPage = () => {
                 name="quantity"
                 value={formData.quantity}
                 onChange={handleChange}
-                className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400 shadow-sm"
+                className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400 shadow-sm text-slate-500"
                 required
               />
             </div>
             <div className="mb-5">
-              <label className="block text-lg font-semibold text-gray-800 mb-2">
+              <label className="block text-lg font-semibold text-slate-500 mb-2">
                 Price ($)
               </label>
               <input
@@ -202,7 +202,7 @@ const AddFoodPage = () => {
                 name="price"
                 value={formData.price}
                 onChange={handleChange}
-                className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400 shadow-sm"
+                className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400 shadow-sm text-slate-500"
                 required
               />
             </div>

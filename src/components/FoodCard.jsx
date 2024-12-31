@@ -32,7 +32,7 @@ const FoodCard = ({ food }) => {
         <img
           src={image}
           alt={name}
-          className="w-full h-56 object-cover"
+          className="w-full h-56 object-fill"
         />
         {isOutOfStock && (
           <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center text-white text-lg font-semibold">
@@ -60,7 +60,7 @@ const FoodCard = ({ food }) => {
             value={purchaseQuantity}
             onChange={handleQuantityChange}
             disabled={isOutOfStock || isOwnFood}
-            className="w-20 h-10 border border-gray-300 rounded-md px-3 text-center text-gray-800 focus:ring-2 focus:ring-indigo-500 focus:outline-none disabled:opacity-50"
+            className="w-20 h-10 border border-gray-300 rounded-md px-3 text-center text-slate-800 focus:ring-2 focus:ring-indigo-500 focus:outline-none disabled:opacity-50"
           />
           <button
             onClick={handlePurchase}
