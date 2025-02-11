@@ -1,6 +1,8 @@
 import { NavLink, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import TopFoodCard from '../../components/TopFoodCard';
+import Newsletter from '../../components/Newsletter';
+import CustomerReviews from '../../components/CustomerReviews';
 import backgroundImage from '../../assets/banner.jpg';
 import specialDish1 from '../../assets/extra1.jpg';
 import specialDish2 from '../../assets/extra2.jpg';
@@ -139,6 +141,12 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      {/* Customer Reviews Section */}
+      <CustomerReviews />
+
+      {/* Newsletter Section */}
+      <Newsletter />
     </div>
   );
 };
