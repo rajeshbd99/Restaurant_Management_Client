@@ -76,7 +76,7 @@ const AllFoods = () => {
 
       {/* Search Section */}
       <section className="py-8 px-4">
-        <div className="container mx-auto flex justify-center items-center">
+        <div className="mx-auto flex justify-center items-center">
           <input
             type="text"
             placeholder="Search for food..."

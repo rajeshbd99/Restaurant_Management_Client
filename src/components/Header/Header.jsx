@@ -73,7 +73,7 @@ const Header = () => {
           : 'bg-white shadow-md text-gray-800'
       } ${isScrolled ? 'backdrop-blur-lg bg-opacity-70' : ''}`}
     >
-      <div className="container mx-auto flex items-center justify-between">
+      <div className=" mx-auto flex items-center justify-between">
         {/* Logo */}
         <div
           className="text-2xl font-bold cursor-pointer hover:text-red-600"

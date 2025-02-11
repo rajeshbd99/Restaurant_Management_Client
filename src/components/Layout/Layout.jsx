@@ -8,19 +8,19 @@ const Layout = () => {
         <div className="flex flex-col min-h-screen">
             {/* Navbar should be full-width but content aligned */}
             <div className="w-full fixed top-0 left-0 z-50 bg-white shadow-md">
-                <div className="max-w-7xl mx-auto px-5">
+                <div className=" mx-auto px-5">
                     <Header />
                 </div>
             </div>
 
             {/* Main Content with proper padding to account for fixed navbar */}
-            <main className="flex-1 mt-16 max-w-7xl mx-auto px-5 py-6">
+            <main className="flex-1 mt-16 px-5 py-6">
                 <Outlet />
             </main>
 
             {/* Footer should be full-width but content aligned */}
             <div className="w-full bg-gray-900 text-white">
-                <div className="max-w-7xl mx-auto px-5">
+                <div className=" mx-auto px-5">
                     <Footer />
                 </div>
             </div>

@@ -5,6 +5,7 @@ import backgroundImage from '../../assets/banner.jpg';
 import specialDish1 from '../../assets/extra1.jpg';
 import specialDish2 from '../../assets/extra2.jpg';
 import specialDish3 from '../../assets/extra3.jpg';
+import specialDish4 from '../../assets/extra4.jpg';
 import { Circles } from 'react-loader-spinner';
 
 const Home = () => {
@@ -43,7 +44,7 @@ const Home = () => {
           backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.7)), url(${backgroundImage})`,
         }}
       >
-        <div className="container mx-auto px-6 lg:px-12 text-white text-center">
+        <div className="container mx-auto  px-6 lg:px-12 text-white text-center">
           <div className="max-w-2xl mx-auto">
             <h1 className="text-6xl font-extrabold mb-6 leading-tight">
               Welcome to <span className="text-yellow-400">DineFusion</span>
@@ -65,7 +66,7 @@ const Home = () => {
 
       {/* Top Foods Section */}
       <section className="py-16 bg-gradient-to-r from-orange-100 via-white to-orange-100 mt-10 mb-10 rounded-2xl">
-        <div className="container mx-auto px-6 lg:px-20">
+        <div className="mx-auto px-6 lg:px-20">
           <h2 className="text-4xl font-extrabold text-slate-800 text-center mb-12">
             Explore Our <span className="text-orange-400">Top Foods</span>
           </h2>
@@ -83,8 +84,8 @@ const Home = () => {
               />
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
-              {topFoods.slice(0, 6).map((food) => (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+              {topFoods.slice(0, 8).map((food) => (
                 <TopFoodCard key={food._id} food={food} />
               ))}
             </div>
@@ -102,15 +103,15 @@ const Home = () => {
 
       {/* Chef's Specials Section */}
       <section className="py-16 bg-gradient-to-r from-yellow-100 via-white to-yellow-100 mt-10 mb-10 rounded-2xl">
-        <div className="container mx-auto px-4">
+        <div className="mx-auto px-6 lg:px-20">
           <h2 className="text-5xl font-extrabold text-center text-slate-900 mb-4">
             Chef's <span className="text-yellow-400">Specials</span>
           </h2>
           <p className="text-xl text-center text-slate-600 max-w-4xl mx-auto mb-12">
             Available for a limited time, don't miss the chance to savor these mouthwatering delights!
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-            {[specialDish1, specialDish2, specialDish3].map((image, index) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+            {[specialDish1, specialDish2, specialDish3, specialDish4].map((image, index) => (
               <div
                 key={index}
                 className="card bg-white border-2 border-yellow-300 rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300"
