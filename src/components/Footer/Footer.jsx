@@ -22,16 +22,16 @@ const Footer = () => {
           <h3 className="text-xl font-semibold mb-4">Quick Links</h3>
           <ul className="space-y-2">
             <li>
-              <a href="#about" className="hover:underline">About Us</a>
+              <a href="/" className="hover:underline">Home</a>
             </li>
             <li>
-              <a href="#menu" className="hover:underline">Our Menu</a>
+              <a href="/foods" className="hover:underline">All Foods</a>
             </li>
             <li>
-              <a href="#reservations" className="hover:underline">Reservations</a>
+              <a href="/gallery" className="hover:underline">Gallery</a>
             </li>
             <li>
-              <a href="#contact" className="hover:underline">Contact</a>
+              <a href="/my-foods" className="hover:underline">My Foods</a>
             </li>
           </ul>
         </div>
@@ -54,22 +54,52 @@ const Footer = () => {
         <div>
           <h3 className="text-xl font-semibold mb-4">Follow Us</h3>
           <div className="flex space-x-4 text-lg">
-            <a href="#!" aria-label="Facebook" className="hover:text-blue-500">
-              <FaFacebook />
+            <a
+                href="https://facebook.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Facebook"
+                className="hover:text-blue-500"
+            >
+                <FaFacebook />
             </a>
-            <a href="#!" aria-label="Twitter" className="hover:text-blue-400">
-              <FaTwitter />
+            <a
+                href="https://twitter.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Twitter"
+                className="hover:text-blue-400"
+            >
+                <FaTwitter />
             </a>
-            <a href="#!" aria-label="Instagram" className="hover:text-pink-500">
-              <FaInstagram />
+            <a
+                href="https://instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+                className="hover:text-pink-500"
+            >
+                <FaInstagram />
             </a>
-            <a href="#!" aria-label="LinkedIn" className="hover:text-blue-300">
-              <FaLinkedin />
+            <a
+                href="https://linkedin.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn"
+                className="hover:text-blue-300"
+            >
+                <FaLinkedin />
             </a>
-            <a href="#!" aria-label="YouTube" className="hover:text-red-500">
-              <FaYoutube />
+            <a
+                href="https://youtube.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="YouTube"
+                className="hover:text-red-500"
+            >
+                <FaYoutube />
             </a>
-          </div>
+        </div>
         </div>
       </div>
 
