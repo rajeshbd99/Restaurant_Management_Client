@@ -29,7 +29,7 @@ const ChefSpecials = () => {
     ];
 
     return (
-        <section className="py-16 mt-10 mb-10 rounded-2xl bg-gradient-to-r from-yellow-50 to-yellow-100">
+        <section className="py-16 mt-10 mb-10 rounded-2xl">
             <div className="mx-auto px-6 lg:px-20">
                 <h2 className="text-5xl font-extrabold text-center text-gray-800 mb-6">
                     Chef's <span className="text-yellow-500">Specials</span>
