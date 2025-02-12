@@ -15,22 +15,22 @@ const TopFoodCard = ({ food }) => {
           Top Pick
         </span>
       </div>
-      <div className="card-body p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+      <div className="card-body p-6 bg-white rounded-b-lg shadow-md hover:shadow-lg transition-shadow duration-300">
         {/* Food Name */}
-        <h2 className="text-xl font-extrabold mb-3 text-gray-900">{name}</h2>
+        <h2 className="text-xl font-extrabold mb-2 text-gray-900">{name}</h2>
 
         {/* Price and Purchases */}
         <p className="text-md text-gray-700 mb-2">
           <span className="font-semibold text-gray-800">Price:</span>
-          <span className="text-green-600 font-bold ml-1">${price.toFixed(2)}</span>
+          <span className="text-blue-600 font-bold ml-1">${price.toFixed(2)}</span>
         </p>
-        <p className="text-sm text-gray-500 mb-4">
+        <p className="text-sm text-gray-500 mb-2">
           <span className="font-medium text-gray-700">Total Purchases:</span>
           <span className="text-blue-600 ml-1">{purchaseCount}</span>
         </p>
 
         {/* Call-to-Action and Notice */}
-        <div className="flex justify-between items-center mt-4">
+        <div className="flex justify-between items-center">
           <NavLink
             to={`/foods/${_id}`}
             className="px-5 py-2 bg-gradient-to-r from-yellow-400 to-yellow-500 text-black font-semibold rounded-full shadow hover:from-yellow-300 hover:to-yellow-400 transition duration-300"

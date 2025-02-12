@@ -70,7 +70,7 @@ const Home = () => {
       <section className="py-16 bg-gradient-to-r from-orange-100 via-white to-orange-100 mt-10 mb-10 rounded-2xl">
         <div className="mx-auto px-6 lg:px-20">
           <h2 className="text-4xl font-extrabold text-slate-800 text-center mb-12">
-            Explore Our <span className="text-orange-400">Top Foods</span>
+            Explore Our <span className="text-yellow-400">Top Foods</span>
           </h2>
           <p className="text-center text-lg text-slate-600 mb-12 max-w-3xl mx-auto">
             Discover the best dishes curated just for you. Relish the flavors that have won hearts and taste buds alike!

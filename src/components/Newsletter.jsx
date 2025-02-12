@@ -7,16 +7,16 @@ const Newsletter = () => {
 
                 {/* Icon */}
                 <div className="flex justify-center">
-                    <FaPaperPlane className="text-yellow-500 text-6xl mb-4" />
+                    <FaPaperPlane className="text-yellow-400 text-6xl mb-4" />
                 </div>
 
                 {/* Heading */}
-                <h2 className="text-4xl font-extrabold text-gray-900 mb-3">
+                <h2 className="text-4xl font-extrabold text-slate-900 mb-3">
                     Join Our <span className="text-yellow-500">Newsletter</span>
                 </h2>
 
                 {/* Description */}
-                <p className="text-lg text-gray-700 mb-6">
+                <p className="text-lg text-slate-600 mb-6">
                     Stay ahead with exclusive offers, delicious recipes, and exciting updates. Sign up now!
                 </p>
 
@@ -25,7 +25,7 @@ const Newsletter = () => {
                     <input
                         type="email"
                         placeholder="Your email address"
-                        className="w-full min-w-0 p-3 md:p-4 text-gray-800 text-base md:text-lg rounded-full border border-yellow-300 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                        className="w-full min-w-0 p-3 md:p-4 text-slate-500 text-base md:text-lg rounded-full border border-yellow-300 focus:outline-none focus:ring-2 focus:ring-yellow-500"
                     />
                     <button className="w-full sm:w-auto bg-yellow-500 hover:bg-yellow-400 text-white font-semibold px-5 md:px-6 py-3 md:py-4 rounded-full shadow-md flex items-center justify-center gap-2 transition-all duration-300">
                         Subscribe <FaPaperPlane className="text-lg md:text-xl" />
