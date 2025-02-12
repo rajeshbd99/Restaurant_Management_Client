@@ -93,12 +93,14 @@ const Home = () => {
             </div>
           )}
           <div className="text-center mt-12">
+            <button className="inline-block px-8 py-4 bg-yellow-600 text-white font-semibold rounded-full shadow-lg hover:bg-yellow-500 hover:shadow-xl transition duration-300">
             <NavLink
               to="/foods"
-              className="inline-block px-8 py-4 bg-yellow-600 text-white font-semibold rounded-full shadow-lg hover:bg-yellow-500 hover:shadow-xl transition duration-300"
+              
             >
               Browse All Foods
             </NavLink>
+            </button>
           </div>
         </div>
       </section>
@@ -131,7 +133,7 @@ const Home = () => {
                     A delightful blend of flavors crafted by our expert chefs.
                   </p>
                   <button
-                    className="btn btn-primary px-6 py-2 rounded-full text-white text-sm font-semibold bg-yellow-600 hover:bg-yellow-500 transition-all duration-300"
+                    className="inline-block px-8 py-4 bg-yellow-600 text-white font-semibold rounded-full shadow-lg hover:bg-yellow-500 hover:shadow-xl transition duration-300"
                   >
                     Order Now
                   </button>

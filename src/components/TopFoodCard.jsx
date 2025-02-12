@@ -31,12 +31,13 @@ const TopFoodCard = ({ food }) => {
 
         {/* Call-to-Action and Notice */}
         <div className="flex justify-between items-center">
+          <button className="px-5 py-2 bg-yellow-600 text-black font-semibold rounded-full shadow hover:bg-yellow-500 transition duration-300">
           <NavLink
             to={`/foods/${_id}`}
-            className="px-5 py-2 bg-gradient-to-r from-yellow-400 to-yellow-500 text-black font-semibold rounded-full shadow hover:from-yellow-300 hover:to-yellow-400 transition duration-300"
           >
             View Details
           </NavLink>
+          </button>
           <span className="text-sm text-slate-500 italic">
             Limited Stock Available
           </span>

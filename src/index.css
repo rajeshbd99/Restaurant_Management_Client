@@ -114,7 +114,7 @@ html.dark .navbar {
 /* Navbar Buttons */
 .navbar-start button {
     transition: color 0.4s ease;
-    color: var(--primary-500);
+    color: var(--primary-600);
 }
 
 html.dark .navbar-start button {
@@ -127,7 +127,7 @@ html.dark .navbar-start button {
 }
 
 html.light .menu li a:hover {
-    color: var(--primary-700);
+    color: var(--indigo-700);
 }
 
 html.dark .menu li a:hover {
@@ -148,28 +148,28 @@ button {
 }
 
 html.light button {
-    background-color: var(--primary-500);
+    background-color: var(--indigo-600);
     color: white;
 }
 
 html.dark button {
-    background-color: var(--primary-700);
+    background-color: var(--indigo-700);
     color: var(--white-900);
 }
 
 /* Dark Mode Button Hover */
 html.dark button:hover {
-    background-color: var(--primary-500);
+    background-color: var(--indigo-600);
 }
 
 /* Avatar */
 .avatar img {
     border-radius: 50%;
-    border: 2px solid var(--primary-500);
+    border: 2px solid var(--indigo-600);
 }
 
 .avatar:hover {
-    border: 2px solid var(--primary-700);
+    border: 2px solid var(--indigo-700);
 }
 
 /* Food Details Section */
@@ -187,7 +187,7 @@ html.dark .food-card p {
 }
 
 html.dark .food-card .text-green-600 {
-    color: var(--primary-500);  
+    color: var(--indigo-600);  
 }
 
 html.dark .food-card .text-gray-500 {
@@ -205,13 +205,13 @@ html.dark .food-card button:hover {
 
 /* Purchase Button in Dark Mode */
 html.dark .purchase-button {
-    background-color: var(--primary-700);
+    background-color: var(--indigo-700);
     color: var(--white-900);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 html.dark .purchase-button:hover {
-    background-color: var(--primary-500);
+    background-color: var(--indigo-600);
 }
 
 /* Dynamic Availability Badge */
