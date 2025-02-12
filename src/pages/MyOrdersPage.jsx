@@ -113,7 +113,7 @@ const MyOrdersPage = () => {
                   <td className="p-3">
                     <button
                       onClick={() => handleDelete(order._id)}
-                      className="btn btn-error btn-sm w-full sm:w-auto"
+                      className="btn btn-sm w-full sm:w-auto"
                     >
                       Delete
                     </button>

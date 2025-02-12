@@ -70,7 +70,7 @@ const SingleFoodPage = () => {
           <h1 className="text-4xl font-extrabold text-gray-900 hover:text-indigo-600 transition-colors duration-300">{food.name}</h1>
           <p className="text-lg text-gray-700">{food.description}</p>
           <div className="flex items-center gap-4 text-xl font-semibold text-gray-800">
-            <span className="text-green-600">Price: ${formatPrice(food.price)}</span>
+            <span className="text-blue-600">Price: ${formatPrice(food.price)}</span>
             <span className="text-gray-500">|</span>
             <span className="text-gray-600">Available Quantity: {food.quantity}</span>
           </div>

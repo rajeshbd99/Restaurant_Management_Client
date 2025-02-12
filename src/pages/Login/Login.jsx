@@ -68,7 +68,7 @@ const handleSubmit = async (e) => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen px-4">
+    <div className="flex flex-col items-center justify-center px-4">
       <ToastContainer />
       <div className="w-full max-w-md p-8 space-y-6 rounded-lg shadow-md">
         <div className="">
@@ -170,7 +170,3 @@ const handleSubmit = async (e) => {
 };
 
 export default Login;
-
-
-
-  
