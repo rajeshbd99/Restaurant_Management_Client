@@ -219,3 +219,8 @@ html.dark .food-card .availability-badge {
     background-color: var(--dark-600);
     color: var(--white-900);
 }
+
+html.dark .sorting {
+    background-color: var(--dark-600);
+    color: var(--white-900);
+}

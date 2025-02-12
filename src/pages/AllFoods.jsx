@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import FoodCard from '../components/FoodCard';
 import { Circles } from 'react-loader-spinner';
 import backgroundImage from '../assets/bgAll.jpg';
@@ -8,14 +8,15 @@ import { motion } from 'framer-motion';
 const AllFoods = () => {
   const location = useLocation();
   useEffect(() => {
-    const pageTitle = "DineFusion | All Foods";
-    document.title = pageTitle;
+    document.title = "DineFusion | All Foods";
   }, [location]);
+
   const [foods, setFoods] = useState([]);
   const [filteredFoods, setFilteredFoods] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
+  const [sortOrder, setSortOrder] = useState('');
 
   // Fetch all foods initially
   useEffect(() => {
@@ -48,6 +49,20 @@ const AllFoods = () => {
     setLoading(false);
   };
 
+  // Handle sorting
+  const handleSort = (order) => {
+    setSortOrder(order);
+    let sortedFoods = [...filteredFoods];
+
+    if (order === 'asc') {
+      sortedFoods.sort((a, b) => a.price - b.price);
+    } else if (order === 'desc') {
+      sortedFoods.sort((a, b) => b.price - a.price);
+    }
+
+    setFilteredFoods(sortedFoods);
+  };
+
   // Animation variants
   const containerVariants = {
     hidden: { opacity: 0, scale: 0.8 },
@@ -64,9 +79,7 @@ const AllFoods = () => {
       {/* Page Title Section */}
       <motion.div
         className="page-title text-center py-16 bg-cover bg-center text-white"
-        style={{
-          backgroundImage: `url(${backgroundImage})`,
-        }}
+        style={{ backgroundImage: `url(${backgroundImage})` }}
         variants={containerVariants}
       >
         <h1 className="text-5xl font-bold bg-black bg-opacity-60 inline-block px-6 py-4 rounded-lg">
@@ -74,48 +87,47 @@ const AllFoods = () => {
         </h1>
       </motion.div>
 
-      {/* Search Section */}
+      {/* Search & Sorting Section */}
       <section className="py-8 px-4">
-        <div className="mx-auto flex justify-center items-center">
+        <div className="mx-auto flex flex-col md:flex-row justify-center items-center gap-4">
+          {/* Search Input */}
           <input
             type="text"
             placeholder="Search for food..."
-            className="input input-bordered w-full max-w-lg px-4 py-2 rounded-lg border-2 border-gray-300 focus:outline-none focus:border-indigo-500"
+            className="input input-bordered w-full md:max-w-lg px-4 py-2 rounded-lg border-2 border-gray-300 focus:outline-none focus:border-indigo-500"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
           <button
             onClick={handleSearch}
-            className="btn btn-primary ml-4 px-4 py-2 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 transition duration-300"
+            className="btn btn-primary px-4 py-2 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 transition duration-300"
           >
             Search
           </button>
+
+          {/* Sorting Dropdown */}
+          <select
+            className="sorting select select-bordered px-4 py-2 rounded-lg border-2 border-gray-300 focus:outline-none focus:border-indigo-500"
+            value={sortOrder}
+            onChange={(e) => handleSort(e.target.value)}
+          >
+            <option value="">Sort By</option>
+            <option value="asc">Price: Low to High</option>
+            <option value="desc">Price: High to Low</option>
+          </select>
         </div>
       </section>
 
       {/* Show Spinner when loading */}
-      {loading ? (
+      {loading && (
         <div className="flex justify-center items-center h-64">
-          <Circles
-            height="80"
-            width="80"
-            color="#4fa94d"
-            ariaLabel="circles-loading"
-            wrapperStyle={{}}
-            wrapperClass=""
-            visible={true}
-          />
+          <Circles height="80" width="80" color="#4fa94d" ariaLabel="circles-loading" visible={true} />
         </div>
-      ) : null}
+      )}
 
       {/* Food Cards Section */}
       <section className="py-12">
-        <motion.div
-          className="container mx-auto"
-          initial="hidden"
-          animate="visible"
-          variants={containerVariants}
-        >
+        <motion.div className="container mx-auto" initial="hidden" animate="visible" variants={containerVariants}>
           {loading ? (
             <p className="text-center text-lg font-semibold">Loading foods...</p>
           ) : message ? (
@@ -136,8 +148,11 @@ const AllFoods = () => {
                 <motion.div
                   key={food._id}
                   variants={cardVariants}
+                  className="flex justify-center"
                 >
-                  <FoodCard food={food} />
+                  <div className="w-full max-w-xs aspect-[4/5] flex flex-col">
+                    <FoodCard food={food} />
+                  </div>
                 </motion.div>
               ))}
             </motion.div>

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 
 const FoodCard = ({ food }) => {
-  const navigate =useNavigate();
+  const navigate = useNavigate();
   const { name, image, price, quantity, _id, addedBy } = food;
 
   const user = JSON.parse(localStorage.getItem('user'));
@@ -19,18 +19,17 @@ const FoodCard = ({ food }) => {
 
   const handlePurchase = () => {
     if (isOutOfStock || isOwnFood || purchaseQuantity > quantity) return;
-      navigate(`/purchase/${_id}`);
-  
+    navigate(`/purchase/${_id}`);
   };
 
   return (
-    <div className="max-w-sm mx-auto bg-white rounded-lg shadow-lg overflow-hidden transform hover:scale-105 hover:shadow-xl transition duration-300 mb-10">
+    <div className="w-full max-w-sm mx-auto bg-white rounded-lg shadow-lg overflow-hidden transform hover:scale-105 hover:shadow-xl transition duration-300 mb-10 flex flex-col h-[500px]">
       {/* Image Section */}
-      <div className="relative">
+      <div className="relative h-[220px]">
         <img
           src={image}
           alt={name}
-          className="w-full h-56 object-fill"
+          className="w-full h-full object-cover"
         />
         {isOutOfStock && (
           <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center text-white text-lg font-semibold">
@@ -40,7 +39,7 @@ const FoodCard = ({ food }) => {
       </div>
 
       {/* Content Section */}
-      <div className="p-6">
+      <div className="p-6 flex flex-col flex-grow">
         <h2 className="text-xl font-bold text-gray-800 truncate">{name}</h2>
         <p className="text-gray-500 mt-2">
           <span className="font-semibold">Price:</span> ${typeof price === 'number' ? price.toFixed(2) : 'N/A'}
@@ -69,12 +68,12 @@ const FoodCard = ({ food }) => {
                 : 'bg-indigo-600 text-white hover:bg-indigo-700 transition-colors'
             }`}
           >
-            {quantity<1 ? 'Out of Stock'  : 'Purchase'}
+            {quantity < 1 ? 'Out of Stock' : 'Purchase'}
           </button>
         </div>
 
         {/* Actions Section */}
-        <div className="mt-4">
+        <div className="mt-auto">
           <NavLink
             to={`/foods/${_id}`}
             className="block text-indigo-600 text-center font-medium hover:underline"
