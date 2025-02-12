@@ -4,10 +4,7 @@ import TopFoodCard from '../../components/TopFoodCard';
 import Newsletter from '../../components/Newsletter';
 import CustomerReviews from '../../components/CustomerReviews';
 import backgroundImage from '../../assets/banner.jpg';
-import specialDish1 from '../../assets/extra1.jpg';
-import specialDish2 from '../../assets/extra2.jpg';
-import specialDish3 from '../../assets/extra3.jpg';
-import specialDish4 from '../../assets/extra4.jpg';
+import ChefSpecials from '../../components/ChefSpecials';
 import { Circles } from 'react-loader-spinner';
 
 const Home = () => {
@@ -104,48 +101,8 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Chef's Specials Section */}
-      <section className="py-16 mt-10 mb-10 rounded-2xl">
-        <div className="mx-auto px-6 lg:px-20">
-          <h2 className="text-5xl font-extrabold text-center text-gray-700 mb-4">
-            Chef's <span className="text-yellow-400">Specials</span>
-          </h2>
-          <p className="text-xl text-center text-gray-900 max-w-4xl mx-auto mb-12">
-            Available for a limited time, don't miss the chance to savor these mouthwatering delights!
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
-            {[specialDish1, specialDish2, specialDish3, specialDish4].map((image, index) => (
-              <div
-                key={index}
-                className="card bg-white border-2 border-yellow-300 rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300"
-              >
-                <img
-                  src={image}
-                  alt={`Special Dish ${index + 1}`}
-                  className="w-full h-64 object-cover transform hover:scale-105 transition-transform duration-300"
-                />
-                <div className="p-6 text-center">
-                  <h3 className="text-2xl font-semibold text-gray-800 mb-2">
-                    Special Dish {index + 1}
-                  </h3>
-                  <p className="text-sm text-gray-600 mb-4">
-                    A delightful blend of flavors crafted by our expert chefs.
-                  </p>
-                  <button
-                    className="inline-block px-8 py-4 bg-yellow-600 text-white font-semibold rounded-full shadow-lg hover:bg-yellow-500 hover:shadow-xl transition duration-300"
-                  >
-                    <NavLink
-                      to="/foods"
-                    >
-                      Order Now
-                    </NavLink>
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Chef Specials Section */}
+      <ChefSpecials />
 
       {/* Customer Reviews Section */}
       <CustomerReviews />
