@@ -2,7 +2,7 @@ import { FaPaperPlane } from "react-icons/fa";
 
 const Newsletter = () => {
     return (
-        <section className="py-16 bg-gradient-to-r from-yellow-100 via-white to-yellow-100 mt-10 mb-10 rounded-2xl shadow-xl">
+        <section className="py-16 mt-10 mb-10">
             <div className="max-w-3xl mx-auto px-6 lg:px-16 text-center">
 
                 {/* Icon */}
@@ -11,12 +11,12 @@ const Newsletter = () => {
                 </div>
 
                 {/* Heading */}
-                <h2 className="text-4xl font-extrabold text-slate-900 mb-3">
+                <h2 className="text-4xl font-extrabold text-gray-700 mb-3">
                     Join Our <span className="text-yellow-500">Newsletter</span>
                 </h2>
 
                 {/* Description */}
-                <p className="text-lg text-slate-600 mb-6">
+                <p className="text-lg text-gray-900 mb-6">
                     Stay ahead with exclusive offers, delicious recipes, and exciting updates. Sign up now!
                 </p>
 

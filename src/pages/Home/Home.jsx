@@ -51,7 +51,7 @@ const Home = () => {
             <h1 className="text-6xl font-extrabold mb-6 leading-tight">
               Welcome to <span className="text-yellow-400">DineFusion</span>
             </h1>
-            <p className="text-lg lg:text-xl mb-8">
+            <p className="text-lg  lg:text-xl mb-8">
               Explore a symphony of flavors and indulge in exquisite culinary experiences. Let's make every meal memorable!
             </p>
             <div className="flex justify-center gap-4">
@@ -67,12 +67,12 @@ const Home = () => {
       </section>
 
       {/* Top Foods Section */}
-      <section className="py-16 bg-gradient-to-r from-orange-100 via-white to-orange-100 mt-10 mb-10 rounded-2xl">
+      <section className="py-16 mt-10 mb-10 rounded-2xl">
         <div className="mx-auto px-6 lg:px-20">
-          <h2 className="text-4xl font-extrabold text-slate-800 text-center mb-12">
+          <h2 className="text-4xl font-extrabold text-gray-700 text-center mb-12">
             Explore Our <span className="text-yellow-400">Top Foods</span>
           </h2>
-          <p className="text-center text-lg text-slate-600 mb-12 max-w-3xl mx-auto">
+          <p className="text-center text-lg text-gray-900 mb-12 max-w-3xl mx-auto">
             Discover the best dishes curated just for you. Relish the flavors that have won hearts and taste buds alike!
           </p>
           {loading ? (
@@ -94,24 +94,23 @@ const Home = () => {
           )}
           <div className="text-center mt-12">
             <button className="inline-block px-8 py-4 bg-yellow-600 text-white font-semibold rounded-full shadow-lg hover:bg-yellow-500 hover:shadow-xl transition duration-300">
-            <NavLink
-              to="/foods"
-              
-            >
-              Browse All Foods
-            </NavLink>
+              <NavLink
+                to="/foods"
+              >
+                Browse All Foods
+              </NavLink>
             </button>
           </div>
         </div>
       </section>
 
       {/* Chef's Specials Section */}
-      <section className="py-16 bg-gradient-to-r from-yellow-100 via-white to-yellow-100 mt-10 mb-10 rounded-2xl">
+      <section className="py-16 mt-10 mb-10 rounded-2xl">
         <div className="mx-auto px-6 lg:px-20">
-          <h2 className="text-5xl font-extrabold text-center text-slate-900 mb-4">
+          <h2 className="text-5xl font-extrabold text-center text-gray-700 mb-4">
             Chef's <span className="text-yellow-400">Specials</span>
           </h2>
-          <p className="text-xl text-center text-slate-600 max-w-4xl mx-auto mb-12">
+          <p className="text-xl text-center text-gray-900 max-w-4xl mx-auto mb-12">
             Available for a limited time, don't miss the chance to savor these mouthwatering delights!
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
@@ -135,7 +134,11 @@ const Home = () => {
                   <button
                     className="inline-block px-8 py-4 bg-yellow-600 text-white font-semibold rounded-full shadow-lg hover:bg-yellow-500 hover:shadow-xl transition duration-300"
                   >
-                    Order Now
+                    <NavLink
+                      to="/foods"
+                    >
+                      Order Now
+                    </NavLink>
                   </button>
                 </div>
               </div>

@@ -29,11 +29,11 @@ const reviews = [
 
 const CustomerReviews = () => {
   return (
-    <section className="py-16 bg-gradient-to-r from-orange-100 via-white to-orange-100 mt-10 mb-10 rounded-2xl">
+    <section className="py-16 mt-10 mb-10 rounded-2xl">
       <div className="mx-auto px-6 lg:px-20 text-center">
 
         {/* Heading */}
-        <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-slate-900 mb-4 md:mb-6 flex items-center justify-center gap-2 text-center">
+        <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-gray-700 mb-4 md:mb-6 flex items-center justify-center gap-2 text-center">
           <FaQuoteLeft className="text-yellow-500 text-3xl md:text-4xl" />
           What Our <span className="text-yellow-400">Customers Say</span>
         </h2>
